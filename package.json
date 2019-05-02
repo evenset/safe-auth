@@ -1,0 +1,38 @@
+{
+    "name": "even-auth",
+    "version": "0.0.1",
+    "description": "Authentication for JS",
+    "main": "src/index.ts",
+    "dependencies": {
+        "@types/jsonwebtoken": "^8.3.2",
+        "audit-ci": "^1.6.0"
+    },
+    "devDependencies": {
+        "@types/node": "^11.13.8",
+        "ts-node": "^8.1.0",
+        "typescript": "^3.4.5"
+    },
+    "scripts": {
+        "shell": "ts-node",
+        "tsc": "tsc",
+        "tsc:watch": "tsc --watch",
+        "test": "echo Not implemented yet"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/evenset/even-auth.git"
+    },
+    "keywords": [
+        "authentication",
+        "javascript",
+        "js",
+        "typescript",
+        "ts"
+    ],
+    "author": "Evenset",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/evenset/even-auth/issues"
+    },
+    "homepage": "https://github.com/evenset/even-auth#readme"
+}
