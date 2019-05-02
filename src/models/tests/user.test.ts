@@ -101,7 +101,7 @@ describe('User class', (): void => {
         sinon.replace(User, 'hashPassword', sinon.fake.returns('hashed'));
         sinon.replace(user, 'save', sinon.fake());
 
-        const result = await user.setPassword(password);
+        await user.setPassword(password);
 
         expect(User.hashPassword)
             .to.have.been.calledOnceWith(password);
@@ -109,8 +109,6 @@ describe('User class', (): void => {
             .to.have.been.calledOnce;
         expect(user.password)
             .to.be.equal('hashed');
-        expect(result)
-            .to.be.undefined;
     });
 
     it('should implement a "checkPassword" method that takes a password and' +
@@ -175,13 +173,34 @@ describe('User class', (): void => {
             },
         ));
 
-        const result = await user.logout(token);
+        await user.logout(token);
 
         expect(user.getAccessToken)
             .to.have.been.calledOnceWith(token);
         expect(accessToken.revoke)
             .to.have.been.calledOnce;
-        expect(result)
-            .to.be.undefined;
+    });
+
+    it('should implement a "globalLogout" method that revokes all active' +
+        ' access tokens of the user', async (): Promise<void> => {
+        const user = new DummyUser();
+        const accessTokens: AccessToken[] = [
+            {id: 0, token: '0', revoke: sinon.fake()},
+            {id: 1, token: '1', revoke: sinon.fake()},
+            {id: 2, token: '2', revoke: sinon.fake()},
+        ];
+        sinon.replace(user, 'getActiveAccessTokens', sinon.fake(
+            (): AccessToken[] => {
+                return accessTokens;
+            },
+        ));
+
+        await user.globalLogout();
+
+        expect(user.getActiveAccessTokens)
+            .to.have.been.calledOnce;
+        for (const accessToken of accessTokens)
+            expect(accessToken.revoke)
+                .to.have.been.calledOnce;
     });
 });
