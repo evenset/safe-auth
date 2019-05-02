@@ -2,13 +2,23 @@
     "name": "even-auth",
     "version": "0.0.1",
     "description": "Authentication for JS",
-    "main": "src/index.ts",
     "dependencies": {
         "@types/jsonwebtoken": "^8.3.2",
-        "audit-ci": "^1.6.0"
+        "audit-ci": "^1.6.0",
+        "esm": "^3.2.22"
     },
     "devDependencies": {
+        "@types/chai": "^4.1.7",
+        "@types/jest": "^24.0.12",
         "@types/node": "^11.13.8",
+        "@types/sinon": "^7.0.11",
+        "@types/sinon-chai": "^3.2.2",
+        "chai": "^4.2.0",
+        "faker": "^4.1.0",
+        "jest": "^24.7.1",
+        "sinon": "^7.3.2",
+        "sinon-chai": "^3.3.0",
+        "ts-jest": "^24.0.2",
         "ts-node": "^8.1.0",
         "typescript": "^3.4.5"
     },
@@ -16,7 +26,12 @@
         "shell": "ts-node",
         "tsc": "tsc",
         "tsc:watch": "tsc --watch",
-        "test": "echo Not implemented yet"
+        "test:runner": "export NODE_ENV=test; export POSTGRES_DATABASE=quala-test; ",
+        "test": "npm run test:unit && npm run test:integration",
+        "test:unit": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$",
+        "test:unit:watch": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --watch",
+        "test:integration": "exit 0",
+        "lint": "eslint ."
     },
     "repository": {
         "type": "git",
@@ -34,5 +49,7 @@
     "bugs": {
         "url": "https://github.com/evenset/even-auth/issues"
     },
-    "homepage": "https://github.com/evenset/even-auth#readme"
+    "homepage": "https://github.com/evenset/even-auth#readme",
+    "main": "build/index.js",
+    "module": "build/main.js"
 }
