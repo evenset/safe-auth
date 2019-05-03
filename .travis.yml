@@ -9,6 +9,6 @@ branches:
   only:
     - development
     - master
-scripts:
+script:
   - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then audit-ci --moderate; fi
   - npm test
