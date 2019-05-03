@@ -4,6 +4,10 @@ export abstract class AccessToken {
     public abstract id: number;
     public abstract token: string;
 
+    public expired(): boolean {
+        return false;
+    }
+
     public revoke(): Promise<void> {
         return new Promise((): void => {});
     }

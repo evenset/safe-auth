@@ -164,6 +164,7 @@ describe('User class', (): void => {
             id: 0,
             token,
             revoke: sinon.fake(),
+            expired: (): boolean => false,
         };
         sinon.replace(user, 'getAccessToken', sinon.fake(
             (token: string): AccessToken|null => {
@@ -185,9 +186,24 @@ describe('User class', (): void => {
         ' access tokens of the user', async (): Promise<void> => {
         const user = new DummyUser();
         const accessTokens: AccessToken[] = [
-            {id: 0, token: '0', revoke: sinon.fake()},
-            {id: 1, token: '1', revoke: sinon.fake()},
-            {id: 2, token: '2', revoke: sinon.fake()},
+            {
+                id: 0,
+                token: '0',
+                revoke: sinon.fake(),
+                expired: (): boolean => false,
+            },
+            {
+                id: 1,
+                token: '1',
+                revoke: sinon.fake(),
+                expired: (): boolean => false,
+            },
+            {
+                id: 2,
+                token: '2',
+                revoke: sinon.fake(),
+                expired: (): boolean => false,
+            },
         ];
         sinon.replace(user, 'getActiveAccessTokens', sinon.fake(
             (): AccessToken[] => {
