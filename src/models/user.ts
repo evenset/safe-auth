@@ -67,7 +67,7 @@ export default abstract class User {
 
     public async logout(token: string): Promise<void> {
         const accessToken = await this.getAccessToken(token);
-        if (accessToken) console.log(await accessToken.revoke());
+        if (accessToken) await accessToken.revoke();
     }
 
     public async globalLogout(): Promise<void> {
