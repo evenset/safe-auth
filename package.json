@@ -11,6 +11,7 @@
         "@types/node": "^11.13.8",
         "@types/sinon": "^7.0.11",
         "@types/sinon-chai": "^3.2.2",
+        "audit-ci": "^1.7.0",
         "chai": "^4.2.0",
         "faker": "^4.1.0",
         "jest": "^24.7.1",
