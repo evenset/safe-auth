@@ -9,9 +9,14 @@ branches:
   only:
     - development
     - master
+
+cache:
+  directories:
+    - $HOME/.npm
+
 before_script:
-  - npm install audit-ci eslint
+  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm install audit-ci; npm run audit-ci --moderate; fi
+  - npm install eslint @typescript-eslint/recommended
 script:
-  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm run audit-ci --moderate; fi
   - npm run lint
   - npm test
