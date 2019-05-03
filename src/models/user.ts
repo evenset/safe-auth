@@ -8,11 +8,34 @@ export default abstract class User {
     public abstract createdAt: Date;
     public abstract updatedAt: Date;
 
-    public static create(): Promise<User> {
+    /**
+     * create
+     *
+     * Creates a user instance and sets its usrname and password
+     */
+    public static create(username: string, password: string): Promise<User> {
         throw new Error('Not implemented');
     }
+
+    /**
+     * remove
+     *
+     * Removes the user instance from database
+     */
     public abstract remove(): Promise<void>;
+
+    /**
+     * save
+     *
+     * Saves the user instance in databse
+     */
     public abstract save(): Promise<void>;
+
+    /**
+     * get
+     *
+     * Looks a user up in database based on its id or username
+     */
     public static get({id, username}: {
         id?: number;
         username?: string;
@@ -20,11 +43,58 @@ export default abstract class User {
         throw new Error('Not implemented');
     }
 
-    public abstract getAccessToken(token: string): Promise<AccessToken>;
-    public abstract getAccessTokens(): Promise<AccessToken[]>;
-    public abstract getActiveAccessTokens(): Promise<AccessToken[]>;
-    public abstract getRefreshTokens(): Promise<RefreshToken[]>;
-    public abstract getActiveRefreshTokens(): Promise<RefreshToken[]>;
+    /**
+     * getAccessToken
+     *
+     * Takes a string token and returns the AccessToken instance with that
+     * token that belongs to the user instance (has its user foreign key set to
+     * the user instance).
+     */
+    public async getAccessToken(token: string): Promise<AccessToken> {
+        return await AccessToken.get({token, userId: this.id});
+    }
+
+    /**
+     * getAccessTokens
+     *
+     * Returns all AccessToken instances that belong to this user (have their
+     * user foreign key set to the user instance).
+     */
+    public async getAccessTokens(): Promise<AccessToken[]> {
+        return await AccessToken.filter({userId: this.id});
+    }
+
+    /**
+     * getActiveAccessTokens
+     *
+     * Returns all AccessToken instances that belong to this user (have their
+     * user foreign key set to the user instance) and are not expired yet.
+     */
+    public async getActiveAccessTokens(): Promise<AccessToken[]> {
+        return await AccessToken.filter({userId: this.id, expired: false});
+    }
+
+
+    /**
+     * getRefreshToken
+     *
+     * Takes a string token and returns the RefreshToken instance with that
+     * token that belongs to the user instance (has its user foreign key set to
+     * the user instance).
+     */
+    public async getRefreshToken(token: string): Promise<RefreshToken> {
+        return await RefreshToken.get({token, userId: this.id});
+    }
+
+    /**
+     * getActiveRefreshTokens
+     *
+     * Returns all RefreshToken instances that belong to this user (have their
+     * user foreign key set to the user instance) and are not consumed yet.
+     */
+    public async getActiveRefreshTokens(): Promise<RefreshToken[]> {
+        return await RefreshToken.filter({userId: this.id, consumed: false});
+    }
 
     /**
      * hashPassword
@@ -104,7 +174,7 @@ export default abstract class User {
      */
     public async logout(token: string): Promise<void> {
         const accessToken = await this.getAccessToken(token);
-        if (accessToken && accessToken.expired()) await accessToken.revoke();
+        if (accessToken && !accessToken.expired()) await accessToken.revoke();
     }
 
     /**

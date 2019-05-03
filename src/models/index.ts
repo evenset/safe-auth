@@ -1,8 +1,22 @@
 export {default as User} from './user';
 
 export abstract class AccessToken {
-    public abstract id: number;
     public abstract token: string;
+
+    public static get({token, userId, expired}: {
+        token: string;
+        userId?: number;
+        expired?: boolean;
+    }): Promise<AccessToken> {
+        throw new Error('Not implemented');
+    }
+
+    public static filter({userId, expired}: {
+        userId?: number;
+        expired?: boolean;
+    }): Promise<AccessToken[]> {
+        throw new Error('Not implemented');
+    }
 
     public expired(): boolean {
         return false;
@@ -14,5 +28,18 @@ export abstract class AccessToken {
 }
 
 export abstract class RefreshToken {
-    public abstract id: number;
+    public static get({token, userId, consumed}: {
+        token: string;
+        userId?: number;
+        consumed?: boolean;
+    }): Promise<RefreshToken> {
+        throw new Error('Not implemented');
+    }
+
+    public static filter({userId, consumed}: {
+        userId?: number;
+        consumed?: boolean;
+    }): Promise<RefreshToken[]> {
+        throw new Error('Not implemented');
+    }
 }

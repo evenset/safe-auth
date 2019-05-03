@@ -4,7 +4,7 @@ import sinonChai from 'sinon-chai';
 import crypto from 'crypto';
 
 import User from '../user';
-import {AccessToken, RefreshToken} from '..';
+import {AccessToken} from '..';
 
 chai.use(sinonChai);
 const expect = chai.expect;
@@ -21,26 +21,6 @@ class DummyUser extends User {
     }
 
     public save(): Promise<void> {
-        return new Promise((): void => {});
-    }
-
-    public getAccessToken(token: string): Promise<AccessToken> {
-        return new Promise((): void => {});
-    }
-
-    public getAccessTokens(): Promise<AccessToken[]> {
-        return new Promise((): void => {});
-    }
-
-    public getActiveAccessTokens(): Promise<AccessToken[]> {
-        return new Promise((): void => {});
-    }
-
-    public getRefreshTokens(): Promise<RefreshToken[]> {
-        return new Promise((): void => {});
-    }
-
-    public getActiveRefreshTokens(): Promise<RefreshToken[]> {
         return new Promise((): void => {});
     }
 }
@@ -161,7 +141,6 @@ describe('User class', (): void => {
         const token = 'some-token';
         const user = new DummyUser();
         const accessToken: AccessToken = {
-            id: 0,
             token,
             revoke: sinon.fake(),
             expired: (): boolean => false,
@@ -186,24 +165,9 @@ describe('User class', (): void => {
         ' access tokens of the user', async (): Promise<void> => {
         const user = new DummyUser();
         const accessTokens: AccessToken[] = [
-            {
-                id: 0,
-                token: '0',
-                revoke: sinon.fake(),
-                expired: (): boolean => false,
-            },
-            {
-                id: 1,
-                token: '1',
-                revoke: sinon.fake(),
-                expired: (): boolean => false,
-            },
-            {
-                id: 2,
-                token: '2',
-                revoke: sinon.fake(),
-                expired: (): boolean => false,
-            },
+            {token: '0', revoke: sinon.fake(), expired: (): boolean => false},
+            {token: '1', revoke: sinon.fake(), expired: (): boolean => false},
+            {token: '2', revoke: sinon.fake(), expired: (): boolean => false},
         ];
         sinon.replace(user, 'getActiveAccessTokens', sinon.fake(
             (): AccessToken[] => {
