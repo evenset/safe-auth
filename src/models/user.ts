@@ -26,10 +26,21 @@ export default abstract class User {
     public abstract getRefreshTokens(): Promise<RefreshToken[]>;
     public abstract getActiveRefreshTokens(): Promise<RefreshToken[]>;
 
+    /**
+     * hashPassword
+     *
+     * Takes a password and returns a salted hash of it
+     *
+     * @static
+     * @param {string} password
+     * @returns {string}
+     */
     public static hashPassword(password: string): string {
         const algorithm = 'sha256';
         const iterations = 240000;
         const keyLength = 32;
+        // In order to achieve mostly unique salt per user, we generate 72 bit
+        // salts here.
         const salt = crypto.randomBytes(9).toString('base64');
         const hash = crypto.pbkdf2Sync(
             password,
