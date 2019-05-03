@@ -32,11 +32,11 @@ Currently there is a third party package that uses Sequelize as the storage
 backend which makes Postgres, MySQL, MariaDB, SQLite and Microsoft SQL
 available.
 
-TypeORM and MongoDB will be supported by other third party packages soon. So
+TypeORM and Mongoose will be supported by other third party packages soon. So
 the goal is to have at least these storage backends for safe-auth:
 1. Sequelize
 2. TypeORM
-3. MongoDB
+3. Mongoose
 
 # Serving options
 
