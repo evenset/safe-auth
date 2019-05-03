@@ -30,7 +30,8 @@
         "test:unit": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$",
         "test:unit:watch": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --watch",
         "test:integration": "exit 0",
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "audit-ci": "audit-ci"
     },
     "repository": {
         "type": "git",

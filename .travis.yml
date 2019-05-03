@@ -10,5 +10,6 @@ branches:
     - development
     - master
 script:
-  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then audit-ci --moderate; fi
+  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm audit-ci --moderate; fi
+  - npm lint
   - npm test
