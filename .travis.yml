@@ -11,5 +11,5 @@ branches:
     - master
 script:
   - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm run audit-ci --moderate; fi
-  - npm lint
+  - npm run lint
   - npm test
