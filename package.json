@@ -3,8 +3,6 @@
     "version": "0.0.1",
     "description": "Authentication for JS",
     "dependencies": {
-        "@types/jsonwebtoken": "^8.3.2",
-        "audit-ci": "^1.6.0",
         "esm": "^3.2.22"
     },
     "devDependencies": {

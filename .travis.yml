@@ -9,3 +9,5 @@ branches:
   only:
     - development
     - master
+before_install:
+  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm i -g audit-ci && audit-ci -m; fi
