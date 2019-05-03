@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "description": "Authentication for JS",
     "dependencies": {
-        "audit-ci": "^1.7.0",
         "esm": "^3.2.22",
         "typescript": "^3.4.5"
     },
@@ -30,7 +29,7 @@
         "test:unit": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$",
         "test:unit:watch": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --watch",
         "test:integration": "exit 0",
-        "lint": "eslint ./src",
+        "lint": "eslint --ext ts ./src",
         "audit-ci": "audit-ci"
     },
     "repository": {
