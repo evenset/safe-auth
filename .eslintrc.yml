@@ -1,0 +1,33 @@
+plugins:
+  - '@typescript-eslint'
+env:
+  commonjs: true
+  es6: true
+  node: true
+  jest: true
+extends:
+  - 'eslint:recommended'
+  - 'plugin:@typescript-eslint/recommended'
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: 'module'
+  allowImportExportEverywhere: false
+
+rules: 
+  no-console: 'error'
+  comma-dangle: ['error', 'always-multiline']
+  indent: ['error', 4]
+  no-unused-vars: ['error', {'args': 'none'}]
+  semi: ['error', 'always']
+  quotes: ['error', 'single']
+  key-spacing: ['error', {'beforeColon': false, 'afterColon': true}]
+  object-curly-spacing: ['error', 'never']
+  array-bracket-spacing: ['error', 'never']
+  comma-spacing: ['error', {'before': false, 'after': true}]
+  arrow-spacing: 'error'
+  space-in-parens: ['error']
+  '@typescript-eslint/no-unused-vars': ['error', {'args': 'none'}]

@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - '8'
+  - '10'
+  - '11'
+  - '12'
+branches:
+  only:
+    - development
+    - master
+
+cache:
+  directories:
+    - $HOME/.npm
+
+before_script:
+  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm install audit-ci && npm run audit-ci --moderate; fi
+  - npm install eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
+script:
+  - npm run lint
+  - npm test

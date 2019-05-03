@@ -1,0 +1,59 @@
+{
+    "name": "safe-auth",
+    "version": "0.0.1",
+    "description": "Authentication for JS",
+    "dependencies": {
+        "esm": "^3.2.22",
+        "typescript": "^3.4.5"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.1.7",
+        "@types/jest": "^24.0.12",
+        "@types/node": "^11.13.8",
+        "@types/sinon": "^7.0.11",
+        "@types/sinon-chai": "^3.2.2",
+        "@typescript-eslint/eslint-plugin": "^1.7.0",
+        "@typescript-eslint/parser": "^1.7.0",
+        "chai": "^4.2.0",
+        "eslint": "^5.16.0",
+        "faker": "^4.1.0",
+        "jest": "^24.7.1",
+        "sinon": "^7.3.2",
+        "sinon-chai": "^3.3.0",
+        "ts-jest": "^24.0.2",
+        "ts-node": "^8.1.0",
+        "typedoc": "^0.14.2"
+    },
+    "scripts": {
+        "shell": "ts-node",
+        "tsc": "tsc",
+        "tsc:watch": "tsc --watch",
+        "test:runner": "export NODE_ENV=test; ",
+        "test": "npm run test:unit && npm run test:integration",
+        "test:unit": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$",
+        "test:unit:watch": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --watch",
+        "test:integration": "exit 0",
+        "lint": "eslint --ext ts ./src",
+        "audit-ci": "audit-ci",
+        "tsdoc": "tsdoc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/evenset/safe-auth"
+    },
+    "keywords": [
+        "authentication",
+        "javascript",
+        "js",
+        "typescript",
+        "ts"
+    ],
+    "author": "Evenset",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/evenset/safe-auth/issues"
+    },
+    "homepage": "https://github.com/evenset/safe-auth#readme",
+    "main": "build/index.js",
+    "module": "build/main.js"
+}
