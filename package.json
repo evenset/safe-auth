@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "description": "Authentication for JS",
     "dependencies": {
-        "audit-ci": "^1.7.0",
         "esm": "^3.2.22",
         "typescript": "^3.4.5"
     },

@@ -9,6 +9,8 @@ branches:
   only:
     - development
     - master
+before_script:
+  - npm install audit-ci eslint
 script:
   - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm run audit-ci --moderate; fi
   - npm run lint
