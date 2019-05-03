@@ -15,8 +15,8 @@ cache:
     - $HOME/.npm
 
 before_script:
-  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm install audit-ci; npm run audit-ci --moderate; fi
-  - npm install eslint @typescript-eslint/recommended
+  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm install audit-ci && npm run audit-ci --moderate; fi
+  - npm install eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
 script:
   - npm run lint
   - npm test
