@@ -3,26 +3,10 @@ import {AccessToken, RefreshToken} from './index';
 
 export default abstract class User {
     public abstract id: number;
-    public abstract username: string;
-    public abstract password: string;
+    public username: string;
+    public password: string;
     public abstract createdAt: Date;
     public abstract updatedAt: Date;
-
-    /**
-     * create
-     *
-     * Creates a user instance and sets its usrname and password
-     */
-    public static create(username: string, password: string): Promise<User> {
-        throw new Error('Not implemented');
-    }
-
-    /**
-     * remove
-     *
-     * Removes the user instance from database
-     */
-    public abstract remove(): Promise<void>;
 
     /**
      * save
@@ -42,6 +26,13 @@ export default abstract class User {
     }): Promise<User> {
         throw new Error('Not implemented');
     }
+
+    /**
+     * remove
+     *
+     * Removes the user instance from database
+     */
+    public abstract remove(): Promise<void>;
 
     /**
      * getAccessToken
@@ -188,5 +179,13 @@ export default abstract class User {
         for (const accessToken of accessTokens) {
             await accessToken.revoke();
         }
+    }
+
+    public constructor({username, password}: {
+        username: string;
+        password: string;
+    }) {
+        this.username = username;
+        this.password = password;
     }
 }
