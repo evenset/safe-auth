@@ -59,5 +59,15 @@
         "experimentalDecorators": true,           /* Enables experimental support for ES7 decorators. */
         "emitDecoratorMetadata": true             /* Enables experimental support for emitting type metadata for decorators. */
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*"],
+    "typedocOptions": {
+        "exclude": "**/*.test.ts",
+        "excludeNotExported": "excludeExternals",
+        "mode": "modules",
+        "name": "safe-auth",
+        "out": "docs",
+        "readme": "README.md",
+        "target": "ES6",
+        "toc": true
+    }
 }
