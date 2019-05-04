@@ -1,35 +1,35 @@
 type StoredInterface<T = {}> = Function & { prototype: T };
 
-type Constructor<T = {}> = Function & {
+interface Constructor<T = {}> {
     new(...args: any[]): T;
     prototype: T;
-};
-
-type StoredModelConstructor<T = {
-    remove(): Promise<void>;
-    save(): Promise<void>;
-}> = Function & {
-    new(...args: any[]): T;
-    get({id, username}: {
-        id?: number;
-        username?: string;
-    }): Promise<T>;
 }
 
-export default function Stored<TBase extends StoredInterface>(
-    Base: StoredInterface,
-): StoredModelConstructor {
-    interface Instance {
+interface StoredModelConstructor<T = {
+    remove(): Promise<void>;
+    save(): Promise<void>;
+    id: number|undefined;
+    createdAt: Date;
+    updatedAt: Date;
+}> {
+    new(...args: any[]): T;
+}
+
+
+export default function Stored<T, TBase extends StoredInterface>(
+    Base: TBase,
+): T & {items: {[key: number]: T}} & StoredModelConstructor {
+    type Instance = {
         new(...args: any[]): Class;
         items: {[key: number]: Class};
         idCounter: number;
-    }
+    } & Class
 
-    class Class extends (Base as Constructor) {
+    class Class extends (Base as unknown as Constructor) {
         public createdAt: Date;
         public updatedAt: Date;
         private _id: number|undefined;
-        private static items: {[key: number]: Class} = {};
+        protected static items: {[key: number]: Class} = {};
         private static idCounter: number = 0;
 
         public get id(): number|undefined {
@@ -43,18 +43,6 @@ export default function Stored<TBase extends StoredInterface>(
                 this._id = ++instanceClass.idCounter;
             if (this.id)
                 instanceClass.items[this.id] = this;
-        }
-
-        public static async get({id, username}: {
-            id?: number;
-            username?: string;
-        }): Promise<Class> {
-            if (id && username || !id && !username)
-                throw new Error('Either "id" or "username" should be provided.');
-            if (id)
-                return this.items[id];
-            else
-                return this.items[1];
         }
 
         public async remove(): Promise<void> {
@@ -73,5 +61,9 @@ export default function Stored<TBase extends StoredInterface>(
         value: 'Stored' + (Object.getOwnPropertyDescriptor(Base, 'name') as
             PropertyDescriptor).value,
     });
-    return Class;
+    return Class as unknown as (
+        T &
+        {items: {[key: number]: T}} &
+        StoredModelConstructor
+    );
 }
