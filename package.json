@@ -1,7 +1,7 @@
 {
     "name": "safe-auth",
     "version": "0.0.1",
-    "description": "Authentication for JS",
+    "description": "General purpose authentication solution for Node.js",
     "dependencies": {
         "esm": "^3.2.22",
         "typescript": "^3.4.5"
