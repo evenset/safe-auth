@@ -14,16 +14,29 @@ export default abstract class User {
     public abstract updatedAt: Date;
 
     /**
+     * constructor
+     *
+     * Creates a User by its username and password
+     */
+    public constructor({username, password}: {
+        username: string;
+        password: string;
+    }) {
+        this.username = username;
+        this.password = password;
+    }
+
+    /**
      * save
      *
-     * Saves the user instance in databse
+     * Saves the User instance in databse
      */
     public abstract save(): Promise<void>;
 
     /**
      * get
      *
-     * Looks a user up in database based on its id or username
+     * Looks a User up in database based on its id or username
      */
     public static get({id, username}: {
         id?: number;
@@ -35,7 +48,7 @@ export default abstract class User {
     /**
      * remove
      *
-     * Removes the user instance from database
+     * Removes the User instance from database
      */
     public abstract remove(): Promise<void>;
 
@@ -43,18 +56,18 @@ export default abstract class User {
      * getAccessToken
      *
      * Takes a string token and returns the AccessToken instance with that
-     * token that belongs to the user instance (has its user foreign key set to
-     * the user instance).
+     * token that belongs to the User instance (has its user foreign key set to
+     * the User instance).
      */
-    public async getAccessToken(token: string): Promise<AccessToken> {
+    public async getAccessToken(token: string): Promise<AccessToken|null> {
         return await AccessToken.get({token, userId: this.id});
     }
 
     /**
      * getAccessTokens
      *
-     * Returns all AccessToken instances that belong to this user (have their
-     * user foreign key set to the user instance).
+     * Returns all AccessToken instances that belong to this User (have their
+     * user foreign key set to the User instance).
      */
     public async getAccessTokens(): Promise<AccessToken[]> {
         return await AccessToken.filter({userId: this.id});
@@ -63,8 +76,8 @@ export default abstract class User {
     /**
      * getActiveAccessTokens
      *
-     * Returns all AccessToken instances that belong to this user (have their
-     * user foreign key set to the user instance) and are not expired yet.
+     * Returns all AccessToken instances that belong to this User (have their
+     * user foreign key set to the User instance) and are not expired yet.
      */
     public async getActiveAccessTokens(): Promise<AccessToken[]> {
         return await AccessToken.filter({userId: this.id, expired: false});
@@ -75,18 +88,18 @@ export default abstract class User {
      * getRefreshToken
      *
      * Takes a string token and returns the RefreshToken instance with that
-     * token that belongs to the user instance (has its user foreign key set to
-     * the user instance).
+     * token that belongs to the User instance (has its user foreign key set to
+     * the User instance).
      */
-    public async getRefreshToken(token: string): Promise<RefreshToken> {
+    public async getRefreshToken(token: string): Promise<RefreshToken|null> {
         return await RefreshToken.get({token, userId: this.id});
     }
 
     /**
      * getActiveRefreshTokens
      *
-     * Returns all RefreshToken instances that belong to this user (have their
-     * user foreign key set to the user instance) and are not consumed yet.
+     * Returns all RefreshToken instances that belong to this User (have their
+     * user foreign key set to the User instance) and are not consumed yet.
      */
     public async getActiveRefreshTokens(): Promise<RefreshToken[]> {
         return await RefreshToken.filter({userId: this.id, consumed: false});
@@ -117,7 +130,7 @@ export default abstract class User {
     /**
      * setPassword
      *
-     * Set the user's password and saves the user instance. It stores a salted
+     * Set the User's password and saves the User instance. It stores a salted
      * hashed version of password instead, raw password is never saved.
      */
     public async setPassword(password: string): Promise<void> {
@@ -129,7 +142,7 @@ export default abstract class User {
      * checkPassword
      *
      * As raw passwords are not saved, this method is useful to check a raw
-     * password against the hashed password of the user stored in database.
+     * password against the hashed password of the User stored in database.
      * If passwords match it reutns true, otherwise it returns false.
      */
     public checkPassword(password: string): boolean {
@@ -139,8 +152,8 @@ export default abstract class User {
     /**
      * authenticate
      *
-     * Takes a username and password and checks if they match with a user.
-     * If it matches it returns the matching user, otherwise it returns null
+     * Takes a username and password and checks if they match with a User.
+     * If it matches it returns the matching User, otherwise it returns null
      */
     public static async authenticate(
         username: string,
@@ -165,7 +178,7 @@ export default abstract class User {
      * logout
      *
      * Takes a token string. If there's an active access token associated with
-     * this user with the provided token, it'll revoke it, otherwise it'll be a
+     * this User with the provided token, it'll revoke it, otherwise it'll be a
      * no-op.
      */
     public async logout(token: string): Promise<void> {
@@ -176,7 +189,7 @@ export default abstract class User {
     /**
      * globalLogout
      *
-     * Revokes all active access tokens of the user so that she's logged out of
+     * Revokes all active access tokens of the User so that she's logged out of
      * all devices she's currently logged in.
      */
     public async globalLogout(): Promise<void> {
@@ -184,13 +197,5 @@ export default abstract class User {
         for (const accessToken of accessTokens) {
             await accessToken.revoke();
         }
-    }
-
-    public constructor({username, password}: {
-        username: string;
-        password: string;
-    }) {
-        this.username = username;
-        this.password = password;
     }
 }

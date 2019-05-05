@@ -47,8 +47,10 @@ export default function Stored<T, TBase extends Interface>(
 
         public async remove(): Promise<void> {
             const instanceClass = this.constructor as Instance;
-            if (this.id)
+            if (this.id) {
                 delete instanceClass.items[this.id];
+                this._id = undefined;
+            }
         }
 
         public constructor(...args: any[]) {

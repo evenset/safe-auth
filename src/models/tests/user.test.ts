@@ -139,7 +139,7 @@ describe('User class', (): void => {
             token,
             revoke: sinon.fake(),
             expired: (): boolean => false,
-        };
+        } as unknown as AccessToken;
         sinon.replace(user, 'getAccessToken', sinon.fake(
             (token: string): AccessToken|null => {
                 if (token === accessToken.token)
@@ -166,7 +166,7 @@ describe('User class', (): void => {
             {token: '0', revoke: sinon.fake(), expired: (): boolean => false},
             {token: '1', revoke: sinon.fake(), expired: (): boolean => false},
             {token: '2', revoke: sinon.fake(), expired: (): boolean => false},
-        ];
+        ] as unknown as AccessToken[];
         sinon.replace(user, 'getActiveAccessTokens', sinon.fake(
             (): AccessToken[] => {
                 return accessTokens;
