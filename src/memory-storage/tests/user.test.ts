@@ -16,13 +16,14 @@ afterEach((): void => {
     sinon.restore();
 });
 
-describe('AccessToken', (): void => {
+describe('StoredUser class', (): void => {
     it('should exist', (): void => {
         expect(User)
             .to.exist;
     });
 
     it('should be constructable', (): void => {
+        sinon.replace(User, 'hashPassword', <T>(a: T): T => a);
         const username = faker.internet.userName();
         const password = faker.internet.password();
         const user = new User({username, password});
@@ -34,7 +35,8 @@ describe('AccessToken', (): void => {
         expect(user)
             .to.have.property('password')
             .that.is.a('string')
-            .that.is.equal(password);
+            .that.satisfies((password: string): boolean =>
+                (password.match(/\$/g) || []).length === 3);
     });
 
     it('should be able to save instances which includes generating an id for'
@@ -79,6 +81,7 @@ describe('AccessToken', (): void => {
             [users[0], {username: users[0].username}, users],
             [users[1], {username: users[1].username}, users],
             [users[2], {id: (): number => users[2].id}, users],
+            [null, {username: 'invalid-username'}, users],
         ]).it('Should return %s for query %s', async (
             expected,
             query,

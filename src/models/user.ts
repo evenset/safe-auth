@@ -1,5 +1,9 @@
 import crypto from 'crypto';
-import {AccessToken, RefreshToken} from './index';
+import {AccessToken} from './index';
+
+interface Constructor<T = {}> {
+    new(...args: any[]): T;
+}
 
 /**
  * User
@@ -7,6 +11,7 @@ import {AccessToken, RefreshToken} from './index';
  * User class to be used as is or to be subclassed and extended.
  */
 export default abstract class User {
+    protected static AccessTokenClass: typeof AccessToken & Constructor;
     public abstract id: number;
     public username: string;
     public password: string;
@@ -23,7 +28,7 @@ export default abstract class User {
         password: string;
     }) {
         this.username = username;
-        this.password = password;
+        this.password = User.hashPassword(password);
     }
 
     /**
@@ -60,7 +65,10 @@ export default abstract class User {
      * the User instance).
      */
     public async getAccessToken(token: string): Promise<AccessToken|null> {
-        return await AccessToken.first({token, userId: this.id});
+        return await (this.constructor as typeof User).AccessTokenClass.first({
+            token,
+            userId: this.id,
+        });
     }
 
     /**
@@ -70,7 +78,9 @@ export default abstract class User {
      * user foreign key set to the User instance).
      */
     public async getAccessTokens(): Promise<AccessToken[]> {
-        return await AccessToken.filter({userId: this.id});
+        return await (this.constructor as typeof User).AccessTokenClass.filter({
+            userId: this.id,
+        });
     }
 
     /**
@@ -80,29 +90,10 @@ export default abstract class User {
      * user foreign key set to the User instance) and are not expired yet.
      */
     public async getActiveAccessTokens(): Promise<AccessToken[]> {
-        return await AccessToken.filter({userId: this.id, expired: false});
-    }
-
-
-    /**
-     * getRefreshToken
-     *
-     * Takes a string token and returns the RefreshToken instance with that
-     * token that belongs to the User instance (has its user foreign key set to
-     * the User instance).
-     */
-    public async getRefreshToken(token: string): Promise<RefreshToken|null> {
-        return await RefreshToken.first({token, userId: this.id});
-    }
-
-    /**
-     * getActiveRefreshTokens
-     *
-     * Returns all RefreshToken instances that belong to this User (have their
-     * user foreign key set to the User instance) and are not consumed yet.
-     */
-    public async getActiveRefreshTokens(): Promise<RefreshToken[]> {
-        return await RefreshToken.filter({userId: this.id, consumed: false});
+        return await (this.constructor as typeof User).AccessTokenClass.filter({
+            userId: this.id,
+            active: true,
+        });
     }
 
     /**
@@ -110,13 +101,17 @@ export default abstract class User {
      *
      * Takes a password and returns a salted hash of it
      */
-    public static hashPassword(password: string): string { // TODO: config
+    public static hashPassword(
+        password: string,
+        salt?: string,
+    ): string { // TODO: config
         const algorithm = 'sha256';
         const iterations = 240000;
         const keyLength = 32;
         // In order to achieve mostly unique salt per user, we generate 72 bit
         // salts here.
-        const salt = crypto.randomBytes(9).toString('base64');
+        if (!salt)
+            salt = crypto.randomBytes(9).toString('base64');
         const hash = crypto.pbkdf2Sync(
             password,
             salt,
@@ -146,7 +141,7 @@ export default abstract class User {
      * If passwords match it reutns true, otherwise it returns false.
      */
     public checkPassword(password: string): boolean {
-        return this.password === User.hashPassword(password);
+        return this.password === User.hashPassword(password, this.password.split('$')[2]);
     }
 
     /**
@@ -159,7 +154,7 @@ export default abstract class User {
         username: string,
         password: string,
     ): Promise<User|null> {
-        const user = await User.first({username});
+        const user = await this.first({username});
         if (!user) {
             // This is required to keep the response time of this function the
             // same whether the user exists or not. So that an attacker can't
@@ -183,7 +178,9 @@ export default abstract class User {
      */
     public async logout(token: string): Promise<void> {
         const accessToken = await this.getAccessToken(token);
-        if (accessToken && !accessToken.expired()) await accessToken.revoke();
+        if (accessToken && accessToken.isActive()) {
+            await accessToken.revoke();
+        }
     }
 
     /**

@@ -13,7 +13,7 @@ afterEach((): void => {
     sinon.restore();
 });
 
-describe('AccessToken', (): void => {
+describe('StoredAccessToken class', (): void => {
     it('should exist', (): void => {
         expect(AccessToken)
             .to.exist;
