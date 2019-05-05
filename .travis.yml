@@ -15,7 +15,8 @@ cache:
 
 before_script:
   - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then npm install audit-ci && npm run audit-ci --moderate; fi
-  - npm install eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
+  - npm install eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser codecov
 script:
   - npm run lint
   - npm test
+  - codecov -f coverage/*.json
