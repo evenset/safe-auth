@@ -34,7 +34,7 @@ export default abstract class User {
     public abstract async save(): Promise<void>;
 
     /**
-     * get
+     * first
      *
      * Looks a User up in database based on its id or username
      */

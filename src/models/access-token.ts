@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import {User} from './index';
+import {RefreshToken, User} from './index';
 
 export default abstract class AccessToken {
     public abstract id: number;
@@ -31,7 +31,7 @@ export default abstract class AccessToken {
     public abstract save(): Promise<void>;
 
     /**
-     * get
+     * first
      *
      * Looks an AccessToken up in database based on its token, userId or
      * expiration time
@@ -80,6 +80,12 @@ export default abstract class AccessToken {
      * Revokes this AccessToken
      */
     public async revoke(): Promise<void> {
+        const refreshToken = RefreshToken.first({
+            accessTokenId: this.id,
+        });
+        if (refreshToken) {
+            await refreshToken.remove();
+        }
         return await this.remove();
     }
 }
