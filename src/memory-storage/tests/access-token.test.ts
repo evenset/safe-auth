@@ -136,7 +136,7 @@ describe('AccessToken', (): void => {
                 async (accessToken: AccessToken): Promise<void> =>
                     await accessToken.save(),
             ));
-            const result = await AccessToken.get(query);
+            const result = await AccessToken.first(query);
 
             expect(result).to.be.equal(expected);
         });

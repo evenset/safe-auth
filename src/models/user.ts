@@ -31,14 +31,14 @@ export default abstract class User {
      *
      * Saves the User instance in databse
      */
-    public abstract save(): Promise<void>;
+    public abstract async save(): Promise<void>;
 
     /**
      * get
      *
      * Looks a User up in database based on its id or username
      */
-    public static get({id, username}: {
+    public static async first({id, username}: {
         id?: number;
         username?: string;
     }): Promise<User|null> {
@@ -50,7 +50,7 @@ export default abstract class User {
      *
      * Removes the User instance from database
      */
-    public abstract remove(): Promise<void>;
+    public abstract async remove(): Promise<void>;
 
     /**
      * getAccessToken
@@ -60,7 +60,7 @@ export default abstract class User {
      * the User instance).
      */
     public async getAccessToken(token: string): Promise<AccessToken|null> {
-        return await AccessToken.get({token, userId: this.id});
+        return await AccessToken.first({token, userId: this.id});
     }
 
     /**
@@ -92,7 +92,7 @@ export default abstract class User {
      * the User instance).
      */
     public async getRefreshToken(token: string): Promise<RefreshToken|null> {
-        return await RefreshToken.get({token, userId: this.id});
+        return await RefreshToken.first({token, userId: this.id});
     }
 
     /**
@@ -159,7 +159,7 @@ export default abstract class User {
         username: string,
         password: string,
     ): Promise<User|null> {
-        const user = await User.get({username});
+        const user = await User.first({username});
         if (!user) {
             // This is required to keep the response time of this function the
             // same whether the user exists or not. So that an attacker can't

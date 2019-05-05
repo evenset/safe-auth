@@ -1,4 +1,5 @@
 import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import crypto from 'crypto';
@@ -6,6 +7,7 @@ import crypto from 'crypto';
 import User from '../user';
 import {AccessToken} from '..';
 
+chai.use(chaiAsPromised);
 chai.use(sinonChai);
 const expect = chai.expect;
 
@@ -32,10 +34,10 @@ describe('User class', (): void => {
     });
 
     it('should define but not implement "get" static method', (): void => {
-        expect(User.get)
+        expect(User.first)
             .to.be.a('function');
-        expect((): Promise<User|null> => User.get({id: 1}))
-            .to.throw('Not implemented');
+        expect(User.first({id: 1}))
+            .to.be.rejectedWith('Not implemented');
     });
 
     it('should implement a "hashPassword" method that hashes' +
@@ -119,7 +121,7 @@ describe('User class', (): void => {
 
         const result = await User.authenticate(username, password);
 
-        expect(User.get)
+        expect(User.first)
             .to.have.been.calledOnceWith({username});
         expect(User.hashPassword)
             .to.have.been.calledOnceWith(password);

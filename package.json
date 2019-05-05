@@ -4,11 +4,11 @@
     "description": "Authentication for JS",
     "dependencies": {
         "esm": "^3.2.22",
-        "jest-each": "^24.8.0",
         "typescript": "^3.4.5"
     },
     "devDependencies": {
         "@types/chai": "^4.1.7",
+        "@types/chai-as-promised": "^7.1.0",
         "@types/faker": "^4.1.5",
         "@types/jest": "^24.0.12",
         "@types/node": "^11.13.8",
@@ -17,9 +17,11 @@
         "@typescript-eslint/eslint-plugin": "^1.7.0",
         "@typescript-eslint/parser": "^1.7.0",
         "chai": "^4.2.0",
+        "chai-as-promised": "^7.1.1",
         "eslint": "^5.16.0",
         "faker": "^4.1.0",
         "jest": "^24.7.1",
+        "jest-each": "^24.8.0",
         "sinon": "^7.3.2",
         "sinon-chai": "^3.3.0",
         "ts-jest": "^24.0.2",
