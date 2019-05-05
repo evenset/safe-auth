@@ -34,7 +34,7 @@ describe('User class', (): void => {
     it('should define but not implement "get" static method', (): void => {
         expect(User.get)
             .to.be.a('function');
-        expect((): Promise<User> => User.get({id: 1}))
+        expect((): Promise<User|null> => User.get({id: 1}))
             .to.throw('Not implemented');
     });
 

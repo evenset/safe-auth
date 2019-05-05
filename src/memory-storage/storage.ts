@@ -1,4 +1,4 @@
-type StoredInterface<T = {}> = Function & { prototype: T };
+type Interface<T = {}> = Function & { prototype: T };
 
 interface Constructor<T = {}> {
     new(...args: any[]): T;
@@ -16,9 +16,9 @@ interface StoredModelConstructor<T = {
 }
 
 
-export default function Stored<T, TBase extends StoredInterface>(
+export default function Stored<T, TBase extends Interface>(
     Base: TBase,
-): T & {items: {[key: number]: T}} & StoredModelConstructor {
+): TBase & {items: {[key: number]: T}} & StoredModelConstructor {
     type Instance = {
         new(...args: any[]): Class;
         items: {[key: number]: Class};
@@ -62,7 +62,7 @@ export default function Stored<T, TBase extends StoredInterface>(
             PropertyDescriptor).value,
     });
     return Class as unknown as (
-        T &
+        TBase &
         {items: {[key: number]: T}} &
         StoredModelConstructor
     );

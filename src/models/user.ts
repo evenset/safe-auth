@@ -1,6 +1,11 @@
 import crypto from 'crypto';
 import {AccessToken, RefreshToken} from './index';
 
+/**
+ * User
+ *
+ * User class to be used as is or to be subclassed and extended.
+ */
 export default abstract class User {
     public abstract id: number;
     public username: string;
@@ -23,7 +28,7 @@ export default abstract class User {
     public static get({id, username}: {
         id?: number;
         username?: string;
-    }): Promise<User> {
+    }): Promise<User|null> {
         throw new Error('Not implemented');
     }
 
