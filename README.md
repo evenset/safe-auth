@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/evenset/safe-auth.svg?branch=development)](https://travis-ci.org/evenset/safe-auth)
+[![codecov](https://codecov.io/gh/evenset/safe-auth/branch/development/graph/badge.svg)](https://codecov.io/gh/evenset/safe-auth)
 
 # What's safe-auth
 
