@@ -4,6 +4,7 @@
 # What's safe-auth
 
 safe-auth is a general purpose authentication solution for Node.js.
+It's written in TypeScript with %100 test code coverage.
 
 # Features
 
@@ -11,14 +12,16 @@ At its core it provides these features:
 
 1. Create users
 1. Activate/Deactivate users
-- Signing in: Issuing an access token and optionally a refresh token for
-    active users when they provide correct username and password
-1. Authenticating users based on the token their provide
-1. Issuing new tokens when users provide a refresh token
-1. Utilities to help users reset their password when they forget it
-1. Signing out: Revoking tokens
-1. Signing out of all devices: Revoking all active tokens of a user
-1. Optionally block a user when he have several failed attempts
+1. Authenticating a user based on their username and password and returning
+    the authenticated user
+1. Issuing a token for a user
+1. Authenticating a user based on an active issued token and returning the
+    authenticated user
+1. Issuing new token based on a refresh token (signing in)
+1. Reset user's password when they forget it
+1. Revoking tokens (signing out)
+1. Revoking all active tokens of a user (signing out of all devices)
+1. Optionally block a user when he has several failed attempts
 1. Logging all requests, responses and events
 1. Configuring paramters and enabaling/disabling optional features in a
     centralized config system
@@ -47,3 +50,8 @@ different serving options ready out of the box:
 1. HTTP POST/GET requests
 1. GraphQL
 1. Rest
+
+# Reporting bugs
+
+You can report issues/bugs in the github repository of the project:
+https://github.com/evenset/safe-auth/issues

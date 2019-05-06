@@ -57,6 +57,7 @@ describe('Refreshing token', (): void => {
         const result = await AccessToken.refreshToken(accessToken.refreshToken);
         expect(result)
             .to.be.an.instanceOf(AccessToken);
-        expect(accessToken.isConsumed()).to.be.true;
+        expect(accessToken.isConsumed())
+            .to.be.true;
     });
 });
