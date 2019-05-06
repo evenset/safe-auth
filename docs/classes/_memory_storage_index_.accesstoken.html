@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>RefreshToken | safe-auth</title>
+	<title>AccessToken | safe-auth</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -40,8 +40,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -56,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_models_index_.html">&quot;models/index&quot;</a>
+					<a href="../modules/_memory_storage_index_.html">&quot;memory-storage/index&quot;</a>
 				</li>
 				<li>
-					<a href="_models_index_.refreshtoken.html">RefreshToken</a>
+					<a href="_memory_storage_index_.accesstoken.html">AccessToken</a>
 				</li>
 			</ul>
-			<h1>Class RefreshToken</h1>
+			<h1>Class AccessToken</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +71,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">RefreshToken</span>
+						<a href="_models_access_token_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span>
+						<span class="tsd-signature-symbol"> &amp; </span>
+						<span class="tsd-signature-type">object</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">AccessToken</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -84,8 +89,8 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_models_index_.refreshtoken.html#filter" class="tsd-kind-icon">filter</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_models_index_.refreshtoken.html#get" class="tsd-kind-icon">get</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_memory_storage_index_.accesstoken.html#filter" class="tsd-kind-icon">filter</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_memory_storage_index_.accesstoken.html#first" class="tsd-kind-icon">first</a></li>
 							</ul>
 						</section>
 					</div>
@@ -97,64 +102,61 @@
 					<a name="filter" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> filter</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">filter<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.refreshtoken.html" class="tsd-signature-type">RefreshToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">filter<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_memory_storage_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/index.ts#L39">models/index.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/6d8231e/src/memory-storage/index.ts#L56">memory-storage/index.ts:56</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Looks up AccessTokens in memory based on its userId, expiration time,
+									its consumed status or its active status</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>__namedParameters: <span class="tsd-signature-type">object</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> __namedParameters: <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>consumed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>user<wbr>Id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-										</li>
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.refreshtoken.html" class="tsd-signature-type">RefreshToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_memory_storage_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="get" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> get</h3>
+					<a name="first" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> first</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.refreshtoken.html" class="tsd-signature-type">RefreshToken</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">first<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_memory_storage_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/index.ts#L31">models/index.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/6d8231e/src/memory-storage/index.ts#L23">memory-storage/index.ts:23</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Looks an AccessToken up in memory based on its token, userId,
+									expiration time, its consumed status or its active status</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>__namedParameters: <span class="tsd-signature-type">object</span></h5>
 									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>consumed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>user<wbr>Id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-										</li>
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.refreshtoken.html" class="tsd-signature-type">RefreshToken</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_memory_storage_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -170,10 +172,16 @@
 						<a href="../modules/_index_.html">"index"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_models_index_.html">"models/index"</a>
+						<a href="../modules/_memory_storage_index_.html">"memory-<wbr>storage/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_models_tests_user_test_.html">"models/tests/user.test"</a>
+						<a href="../modules/_memory_storage_storage_.html">"memory-<wbr>storage/storage"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_models_access_token_.html">"models/access-<wbr>token"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_models_index_.html">"models/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_models_user_.html">"models/user"</a>
@@ -182,24 +190,24 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_models_index_.accesstoken.html" class="tsd-kind-icon">Access<wbr>Token</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_models_index_.refreshtoken.html" class="tsd-kind-icon">Refresh<wbr>Token</a>
+						<a href="_memory_storage_index_.accesstoken.html" class="tsd-kind-icon">Access<wbr>Token</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="_models_index_.refreshtoken.html#filter" class="tsd-kind-icon">filter</a>
+								<a href="_memory_storage_index_.accesstoken.html#filter" class="tsd-kind-icon">filter</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="_models_index_.refreshtoken.html#get" class="tsd-kind-icon">get</a>
+								<a href="_memory_storage_index_.accesstoken.html#first" class="tsd-kind-icon">first</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_memory_storage_index_.user.html" class="tsd-kind-icon">User</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

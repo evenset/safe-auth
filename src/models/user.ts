@@ -6,21 +6,38 @@ interface Constructor<T = {}> {
 }
 
 /**
- * User
- *
- * User class to be used as is or to be subclassed and extended.
+ * User abstract class to be subclassed by a class that implements storage
+ * methods (save, get and remove)
  */
 export default abstract class User {
+    /**
+     * A reference to the AccessToken class that's going to be used in
+     * internal methods of User class
+     */
     protected static AccessTokenClass: typeof AccessToken & Constructor;
+    /**
+     * Primary key
+     */
     public abstract id: number;
+    /**
+     * User's username (unique)
+     */
     public username: string;
+    /**
+     * User's password stored as a hash
+     */
     public password: string;
+    /**
+     * Timestamp of the creation of the instance
+     */
     public abstract createdAt: Date;
+    /**
+     * Timestamp of the last update on the instance (last time save method has
+     * been called)
+     */
     public abstract updatedAt: Date;
 
     /**
-     * constructor
-     *
      * Creates a User by its username and password
      */
     public constructor({username, password}: {
@@ -32,18 +49,18 @@ export default abstract class User {
     }
 
     /**
-     * save
-     *
      * Saves the User instance in databse
      */
     public abstract async save(): Promise<void>;
 
     /**
-     * first
-     *
      * Looks a User up in database based on its id or username
+     *
+     * @param {Object} filters Filters object
+     * @param {number} filters.id Id
+     * @param {strign} filters.username Username
      */
-    public static async first({id, username}: {
+    public static async first(filters: {
         id?: number;
         username?: string;
     }): Promise<User|null> {
@@ -51,15 +68,11 @@ export default abstract class User {
     }
 
     /**
-     * remove
-     *
      * Removes the User instance from database
      */
     public abstract async remove(): Promise<void>;
 
     /**
-     * getAccessToken
-     *
      * Takes a string token and returns the AccessToken instance with that
      * token that belongs to the User instance (has its user foreign key set to
      * the User instance).
@@ -72,8 +85,6 @@ export default abstract class User {
     }
 
     /**
-     * getAccessTokens
-     *
      * Returns all AccessToken instances that belong to this User (have their
      * user foreign key set to the User instance).
      */
@@ -84,8 +95,6 @@ export default abstract class User {
     }
 
     /**
-     * getActiveAccessTokens
-     *
      * Returns all AccessToken instances that belong to this User (have their
      * user foreign key set to the User instance) and are not expired yet.
      */
@@ -97,8 +106,6 @@ export default abstract class User {
     }
 
     /**
-     * hashPassword
-     *
      * Takes a password and returns a salted hash of it
      */
     public static hashPassword(
@@ -123,8 +130,6 @@ export default abstract class User {
     }
 
     /**
-     * setPassword
-     *
      * Set the User's password and saves the User instance. It stores a salted
      * hashed version of password instead, raw password is never saved.
      */
@@ -134,8 +139,6 @@ export default abstract class User {
     }
 
     /**
-     * checkPassword
-     *
      * As raw passwords are not saved, this method is useful to check a raw
      * password against the hashed password of the User stored in database.
      * If passwords match it reutns true, otherwise it returns false.
@@ -145,8 +148,6 @@ export default abstract class User {
     }
 
     /**
-     * authenticate
-     *
      * Takes a username and password and checks if they match with a User.
      * If it matches it returns the matching User, otherwise it returns null
      */
@@ -170,8 +171,6 @@ export default abstract class User {
     }
 
     /**
-     * logout
-     *
      * Takes a token string. If there's an active access token associated with
      * this User with the provided token, it'll revoke it, otherwise it'll be a
      * no-op.
@@ -184,8 +183,6 @@ export default abstract class User {
     }
 
     /**
-     * globalLogout
-     *
      * Revokes all active access tokens of the User so that she's logged out of
      * all devices she's currently logged in.
      */

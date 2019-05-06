@@ -39,7 +39,7 @@
         "test:integration": "exit 0",
         "lint": "eslint --ext ts ./src",
         "audit-ci": "audit-ci",
-        "tsdoc": "tsdoc"
+        "typedoc": "typedoc"
     },
     "repository": {
         "type": "git",

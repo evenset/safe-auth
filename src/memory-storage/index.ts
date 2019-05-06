@@ -4,13 +4,32 @@ import {
 } from '../models';
 import Stored from './storage';
 
+/*
+ * AccessToken class implemented to use dummy in memory database
+ */
 export class AccessToken extends
     Stored<CoreAccessToken, typeof CoreAccessToken>(CoreAccessToken) {
+    /**
+     * Looks an AccessToken up in memory based on its token, userId,
+     * expiration time, its consumed status or its active status
+     *
+     * @param {Object} filters Filters object
+     * @param {string} filters.token Token
+     * @param {number} filters.userId User
+     * @param {boolean} filters.expired Expired
+     * @param {boolean} filters.consumed Consumed
+     * @param {boolean} filters.active Active
+     */
     public static async first({token, userId, expired, consumed, active}: {
+        /** Token */
         token: string;
+        /** User */
         userId?: number;
+        /** Expired */
         expired?: boolean;
+        /** Consumed */
         consumed?: boolean;
+        /** Active */
         active?: boolean;
     }): Promise<AccessToken|null> {
         const items = Object.values(this.items)
@@ -24,10 +43,24 @@ export class AccessToken extends
         return items[0] || null;
     }
 
+    /**
+     * Looks up AccessTokens in memory based on its userId, expiration time,
+     * its consumed status or its active status
+     *
+     * @param {Object} filters Filters object
+     * @param {number} filters.userId User
+     * @param {boolean} filters.expired Expired
+     * @param {boolean} filters.consumed Consumed
+     * @param {boolean} filters.active Active
+     */
     public static async filter({userId, expired, consumed, active}: {
+        /** User */
         userId?: number;
+        /** Expired */
         expired?: boolean;
+        /** Consumed */
         consumed?: boolean;
+        /** Active */
         active?: boolean;
     }={}): Promise<AccessToken[]> {
         return Object.values(this.items)
@@ -40,9 +73,23 @@ export class AccessToken extends
     }
 }
 
+/*
+ * User class implemented to use in memory dummy database
+ */
 export class User extends Stored<CoreUser, typeof CoreUser>(CoreUser) {
+    /**
+     * A reference to the AccessToken class that's going to be used in
+     * internal methods of User class
+     */
     protected static AccessTokenClass = AccessToken;
 
+    /**
+     * Looks a User up in memory based on its id or username
+     *
+     * @param {Object} filters Filters object
+     * @param {number} filters.id Id
+     * @param {strign} filters.username Username
+     */
     public static async first({id, username}: {
         id?: number;
         username?: string;
