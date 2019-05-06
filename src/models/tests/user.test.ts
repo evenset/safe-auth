@@ -49,10 +49,11 @@ describe('User class', (): void => {
             .to.exist;
     });
 
-    it('should define but not implement "first" static method', (): void => {
+    it('should define but not implement "first" static method' +
+        '', async (): Promise<void> => {
         expect(User.first)
             .to.be.a('function');
-        expect(User.first({id: 1}))
+        await expect(User.first({id: 1}))
             .to.be.rejectedWith('Not implemented');
     });
 
@@ -194,6 +195,7 @@ describe('User class', (): void => {
         const username = 'username';
         const password = 'password';
         const user = new DummyUser({username, password});
+        user.isActive = true;
 
         sinon.replace(User, 'first', sinon.fake(
             ({username}: {username: string}): User|null => {
@@ -207,7 +209,7 @@ describe('User class', (): void => {
         const result = await User.authenticate(username, password);
 
         expect(User.first)
-            .to.have.been.calledOnceWith({username});
+            .to.have.been.calledOnceWith({username, isActive: true});
         expect(User.hashPassword)
             .to.have.been.calledOnceWith(password);
         expect(result)
@@ -215,34 +217,12 @@ describe('User class', (): void => {
     });
 
     it('should implement an "authenticate" method that takes a username and a' +
-        ' password and returns null if credentials aren\'t valid' +
+        ' password and returns null if invalid username is provided' +
         '', async (): Promise<void> => {
         const username = 'username';
         const password = 'password';
         const user = new DummyUser({username, password});
-
-        sinon.replace(User, 'first', sinon.fake(
-            ({username}: {username: string}): User|null => {
-                if (username === user.username)
-                    return user;
-                return null;
-            },
-        ));
-
-        const result = await User.authenticate(username, 'invalid-password');
-
-        expect(User.first)
-            .to.have.been.calledOnceWith({username});
-        expect(result)
-            .to.be.null;
-    });
-
-    it('should implement an "authenticate" method that takes a username and a' +
-        ' password and return the matching password if any or null otherwise' +
-        '', async (): Promise<void> => {
-        const username = 'username';
-        const password = 'password';
-        const user = new DummyUser({username, password});
+        user.isActive = true;
 
         sinon.replace(User, 'first', sinon.fake(
             ({username}: {username: string}): User|null => {
@@ -255,7 +235,57 @@ describe('User class', (): void => {
         const result = await User.authenticate('invalid-username', password);
 
         expect(User.first)
-            .to.have.been.calledOnceWith({username: 'invalid-username'});
+            .to.have.been.calledOnceWith({
+                username: 'invalid-username',
+                isActive: true,
+            });
+        expect(result)
+            .to.be.null;
+    });
+
+    it('should implement an "authenticate" method that takes a username and a' +
+        ' password and returns null if invalid password is provided' +
+        '', async (): Promise<void> => {
+        const username = 'username';
+        const password = 'password';
+        const user = new DummyUser({username, password});
+        user.isActive = true;
+
+        sinon.replace(User, 'first', sinon.fake(
+            ({username}: {username: string}): User|null => {
+                if (username === user.username)
+                    return user;
+                return null;
+            },
+        ));
+
+        const result = await User.authenticate(username, 'invalid-password');
+
+        expect(User.first)
+            .to.have.been.calledOnceWith({username, isActive: true});
+        expect(result)
+            .to.be.null;
+    });
+
+    it('should implement an "authenticate" method that takes a username and a' +
+        ' password and returns null if the user is inactivated' +
+        '', async (): Promise<void> => {
+        const username = 'username';
+        const password = 'password';
+        const user = new DummyUser({username, password});
+
+        sinon.replace(User, 'first', sinon.fake(
+            ({username}: {username: string}): User|null => {
+                if (username === user.username)
+                    return user;
+                return null;
+            },
+        ));
+
+        const result = await User.authenticate(username, password);
+
+        expect(User.first)
+            .to.have.been.calledOnceWith({username, isActive: true});
         expect(result)
             .to.be.null;
     });

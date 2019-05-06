@@ -49,17 +49,19 @@ describe('AccessToken class', (): void => {
             .to.exist;
     });
 
-    it('should define but not implement "first" static method', (): void => {
+    it('should define but not implement "first" static method' +
+        '', async (): Promise<void> => {
         expect(AccessToken.first)
             .to.be.a('function');
-        expect(AccessToken.first({token: 'token'}))
+        await expect(AccessToken.first({token: 'token'}))
             .to.be.rejectedWith('Not implemented');
     });
 
-    it('should define but not implement "filter" static method', (): void => {
+    it('should define but not implement "filter" static method' +
+        '', async (): Promise<void> => {
         expect(AccessToken.filter)
             .to.be.a('function');
-        expect(AccessToken.filter({}))
+        await expect(AccessToken.filter({}))
             .to.be.rejectedWith('Not implemented');
     });
 
@@ -157,17 +159,23 @@ describe('AccessToken class', (): void => {
     });
 
     each([
-        ['exists', true, 'the user'],
-        ['exists', false, null],
-        ['doesn\'t exist', true, null],
-        ['doesn\'t exist', false, null],
+        ['exists', true, 'active', 'the user'],
+        ['exists', false, 'active', null],
+        ['doesn\'t exist', true, 'active', null],
+        ['doesn\'t exist', false, 'active', null],
+        ['exists', true, 'inactive', 'the user'],
+        ['exists', false, 'inactive', null],
+        ['doesn\'t exist', true, 'inactive', null],
+        ['doesn\'t exist', false, 'inactive', null],
     ]).it('should implement an "authenticate" static method that takes a' +
         ' token string and returns associated user. If AccessToken matching' +
-        ' the token "%s" and its active status is "%s" it should return "%s"' +
-        '', async (existence, activeStatus, expected): Promise<void> => {
+        ' the token "%s" and its active status is "%s" and the associated' +
+        ' user is "%s" it should return "%s"' +
+        '', async (existence, activeStatus, isActive, expected): Promise<void> => {
         const username = 'username';
         const password = 'password';
         const user = new DummyUser({username, password});
+        user.isActive = isActive;
 
         expect(AccessToken.issue)
             .to.be.a('function');
@@ -208,6 +216,7 @@ describe('AccessToken class', (): void => {
             const username = 'username';
             const password = 'password';
             const user = new DummyUser({username, password});
+            user.isActive = true;
             const accessToken = new DummyAccessToken({
                 user,
                 expires: new Date(
@@ -248,6 +257,38 @@ describe('AccessToken class', (): void => {
             sinon.replace(DummyAccessToken.prototype, 'save', sinon.fake());
 
             const result = await DummyAccessToken.refreshToken('invalid-token');
+
+            expect(result)
+                .to.be.null;
+            expect(DummyAccessToken.prototype.save)
+                .to.not.be.called;
+        });
+
+        it('should do nothing and return null when the user is inactive' +
+            '', async (): Promise<void> => {
+            const username = 'username';
+            const password = 'password';
+            const user = new DummyUser({username, password});
+            const accessToken = new DummyAccessToken({
+                user,
+                expires: new Date(
+                    new Date().getTime() + 10 * 60 * 1000,
+                ),
+            });
+
+            expect(AccessToken.refreshToken)
+                .to.be.a('function');
+
+            sinon.replace(
+                DummyAccessToken,
+                'first',
+                sinon.fake.returns(accessToken),
+            );
+            sinon.replace(DummyAccessToken.prototype, 'save', sinon.fake());
+
+            const result = await DummyAccessToken.refreshToken(
+                accessToken.refreshToken,
+            );
 
             expect(result)
                 .to.be.null;

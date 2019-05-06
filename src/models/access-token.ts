@@ -170,7 +170,10 @@ export default abstract class AccessToken {
      */
     public static async authenticate(token: string): Promise<User|null> {
         const accessToken = await this.first({token});
-        if (accessToken && accessToken.isActive()) {
+        if (
+            accessToken && accessToken.isActive() &&
+            accessToken.user && accessToken.user.isActive
+        ) {
             return accessToken.user;
         }
         return null;
@@ -185,7 +188,10 @@ export default abstract class AccessToken {
         refreshToken: string,
     ): Promise<AccessToken|null> {
         const accessToken = await this.first({refreshToken});
-        if (accessToken && accessToken.isActive()) {
+        if (
+            accessToken && accessToken.isActive() &&
+            accessToken.user && accessToken.user.isActive
+        ) {
             accessToken.consumed = true;
             await accessToken.save();
             return await this.issue(accessToken.user);

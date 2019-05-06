@@ -28,6 +28,10 @@ export default abstract class User {
      */
     public password: string;
     /**
+     * Stores whether the user is active or not in a boolean
+     */
+    public isActive: boolean;
+    /**
      * Timestamp of the creation of the instance
      */
     public abstract createdAt: Date;
@@ -46,6 +50,7 @@ export default abstract class User {
     }) {
         this.username = username;
         this.password = User.hashPassword(password);
+        this.isActive = false; // TODO: Configuration
     }
 
     /**
@@ -59,10 +64,12 @@ export default abstract class User {
      * @param {Object} filters Filters object
      * @param {number} filters.id Id
      * @param {strign} filters.username Username
+     * @param {boolean} filters.isActive Activation status
      */
     public static async first(filters: {
         id?: number;
         username?: string;
+        isActive?: boolean;
     }): Promise<User|null> {
         throw new Error('Not implemented');
     }
@@ -155,8 +162,12 @@ export default abstract class User {
         username: string,
         password: string,
     ): Promise<User|null> {
-        const user = await this.first({username});
-        if (!user) {
+        const user = await this.first({username, isActive: true});
+        // The value of "isActive" is double checked in case the class that
+        // implements "first" method mistakenly is not respecting "isActive"
+        // parameter. It's preferred that it respects "isActive" for
+        // performance concerns but in case it doesn't we double check here.
+        if (!user || !user.isActive) {
             // This is required to keep the response time of this function the
             // same whether the user exists or not. So that an attacker can't
             // understand if the user exists or not by measuring the response
