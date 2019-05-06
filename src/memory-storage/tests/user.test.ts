@@ -66,10 +66,10 @@ describe('StoredUser class', (): void => {
 
         expect(user)
             .to.have.property('id')
-            .that.is.equal(undefined);
+            .that.is.undefined;
     });
 
-    describe('should implement a "get" method that looks up an "AccessToken"' +
+    describe('should implement a "first" method that looks up a "User"' +
         ' in database based on its token and optionally user id or expiration' +
         ' status.', (): void => {
         const users = [
@@ -81,6 +81,11 @@ describe('StoredUser class', (): void => {
             [users[0], {username: users[0].username}, users],
             [users[1], {username: users[1].username}, users],
             [users[2], {id: (): number => users[2].id}, users],
+            [
+                null,
+                {id: (): number => users[0].id + users[1].id + users[2].id},
+                users,
+            ],
             [null, {username: 'invalid-username'}, users],
         ]).it('Should return %s for query %s', async (
             expected,

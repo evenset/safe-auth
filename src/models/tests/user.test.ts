@@ -11,6 +11,8 @@ chai.use(chaiAsPromised);
 chai.use(sinonChai);
 const expect = chai.expect;
 
+afterEach((): void => sinon.restore());
+
 class DummyAccessToken extends AccessToken {
     public id = 1;
     public createdAt = new Date();
@@ -40,8 +42,6 @@ class DummyUser extends User {
         return new Promise((): void => {});
     }
 }
-
-afterEach((): void => sinon.restore());
 
 describe('User class', (): void => {
     it('should exist', (): void => {
@@ -234,7 +234,7 @@ describe('User class', (): void => {
         expect(User.first)
             .to.have.been.calledOnceWith({username});
         expect(result)
-            .to.be.equal(null);
+            .to.be.null;
     });
 
     it('should implement an "authenticate" method that takes a username and a' +
@@ -257,7 +257,7 @@ describe('User class', (): void => {
         expect(User.first)
             .to.have.been.calledOnceWith({username: 'invalid-username'});
         expect(result)
-            .to.be.equal(null);
+            .to.be.null;
     });
 
     it('should implement a "logout" method that takes an access token string' +

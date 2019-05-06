@@ -33,10 +33,8 @@
         "tsc": "tsc",
         "tsc:watch": "tsc --watch",
         "test:runner": "export NODE_ENV=test; ",
-        "test": "npm run test:unit && npm run test:integration",
-        "test:unit": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --coverage",
-        "test:unit:watch": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --coverage --watch",
-        "test:integration": "exit 0",
+        "test": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --coverage",
+        "test:watch": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --coverage --watch",
         "lint": "eslint --ext ts ./src",
         "audit-ci": "audit-ci",
         "typedoc": "typedoc"

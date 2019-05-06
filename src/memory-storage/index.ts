@@ -10,19 +10,29 @@ import Stored from './storage';
 export class AccessToken extends
     Stored<CoreAccessToken, typeof CoreAccessToken>(CoreAccessToken) {
     /**
-     * Looks an AccessToken up in memory based on its token, userId,
-     * expiration time, its consumed status or its active status
+     * Looks an AccessToken up in memory based on its token, refreshToken,
+     * userId, its expired status, its consumed status or its active status
      *
      * @param {Object} filters Filters object
      * @param {string} filters.token Token
+     * @param {string} filters.refreshToken Refresh token
      * @param {number} filters.userId User
      * @param {boolean} filters.expired Expired
      * @param {boolean} filters.consumed Consumed
      * @param {boolean} filters.active Active
      */
-    public static async first({token, userId, expired, consumed, active}: {
+    public static async first({
+        token,
+        refreshToken,
+        userId,
+        expired,
+        consumed,
+        active,
+    }: {
         /** Token */
         token: string;
+        /** Refresh token */
+        refreshToken?: string;
         /** User */
         userId?: number;
         /** Expired */
@@ -34,8 +44,12 @@ export class AccessToken extends
     }): Promise<AccessToken|null> {
         const items = Object.values(this.items)
             .filter((item): boolean => (
-                item.token === token &&
-                (!userId || item.user.id === userId) &&
+                (token === undefined || item.token === token) &&
+                (
+                    refreshToken === undefined ||
+                    item.refreshToken === refreshToken
+                ) &&
+                (userId === undefined || item.user.id === userId) &&
                 (expired === undefined || item.isExpired() === expired) &&
                 (consumed === undefined || item.isConsumed() === consumed) &&
                 (active === undefined || item.isActive() === active)
@@ -44,7 +58,7 @@ export class AccessToken extends
     }
 
     /**
-     * Looks up AccessTokens in memory based on its userId, expiration time,
+     * Looks up AccessTokens in memory based on its userId, its expired status,
      * its consumed status or its active status
      *
      * @param {Object} filters Filters object
@@ -65,7 +79,7 @@ export class AccessToken extends
     }={}): Promise<AccessToken[]> {
         return Object.values(this.items)
             .filter((item): boolean => (
-                (!userId || item.user.id === userId) &&
+                (userId === undefined || item.user.id === userId) &&
                 (expired === undefined || item.isExpired() === expired) &&
                 (consumed === undefined || item.isConsumed() === consumed) &&
                 (active === undefined || item.isActive() === active)

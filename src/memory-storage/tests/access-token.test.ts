@@ -60,12 +60,12 @@ describe('StoredAccessToken class', (): void => {
 
         expect(accessToken)
             .to.have.property('id')
-            .that.is.equal(undefined);
+            .that.is.undefined;
     });
 
-    describe('should implement a "get" method that looks up an "AccessToken"' +
-        ' in database based on its token and optionally user id or expiration' +
-        ' status.', (): void => {
+    describe('should implement a "first" method that looks up an' +
+        ' "AccessToken" in database based on its token and optionally user id' +
+        ' or expiration status.', (): void => {
         const firstUser = new Object({id: 1}) as User;
         const secondUser = new Object({id: 2}) as User;
         const thirdUser = new Object({id: 3}) as User;

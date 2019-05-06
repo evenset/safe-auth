@@ -71,11 +71,12 @@ export default abstract class AccessToken {
     public abstract save(): Promise<void>;
 
     /**
-     * Looks an AccessToken up in database based on its token, userId,
-     * expiration time, its consumed status or its active status
+     * Looks an AccessToken up in database based on its token, refreshToken,
+     * userId, its expired status, its consumed status or its active status
      *
      * @param {Object} filters Filters object
      * @param {string} filters.token Token
+     * @param {string} filters.refreshToken Refresh token
      * @param {number} filters.userId User
      * @param {boolean} filters.expired Expired
      * @param {boolean} filters.consumed Consumed
@@ -83,7 +84,9 @@ export default abstract class AccessToken {
      */
     public static async first(filters: {
         /** Token */
-        token: string;
+        token?: string;
+        /** Refresh token */
+        refreshToken?: string;
         /** User */
         userId?: number;
         /** Expired */
@@ -97,8 +100,8 @@ export default abstract class AccessToken {
     }
 
     /**
-     * Looks up AccessTokens in database based on its userId, expiration time,
-     * its consumed status or its active status
+     * Looks up AccessTokens in database based on its userId,
+     * its expired status, its consumed status or its active status
      *
      * @param {Object} filters Filters object
      * @param {number} filters.userId User
@@ -165,6 +168,7 @@ export default abstract class AccessToken {
             user,
             expires: new Date(new Date().getTime() + 10 * 60 * 1000),
         }) as AccessToken;
+        await accessToken.save();
         return accessToken;
     }
 
@@ -176,6 +180,23 @@ export default abstract class AccessToken {
         const accessToken = await this.first({token});
         if (accessToken && accessToken.isActive()) {
             return accessToken.user;
+        }
+        return null;
+    }
+
+    /**
+     * If an active "AccessToken" with its "refreshToken" equal to the token
+     * parameter of this method, it'll get consumed, a new "AccessToken" will
+     * be issued and returns. Otherwise it's a no-op and returns null.
+     */
+    public static async refreshToken(
+        refreshToken: string,
+    ): Promise<AccessToken|null> {
+        const accessToken = await this.first({refreshToken});
+        if (accessToken && accessToken.isActive()) {
+            accessToken.consumed = true;
+            await accessToken.save();
+            return await this.issue(accessToken.user);
         }
         return null;
     }

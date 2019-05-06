@@ -11,6 +11,8 @@ chai.use(chaiAsPromised);
 chai.use(sinonChai);
 const expect = chai.expect;
 
+afterEach((): void => sinon.restore());
+
 class DummyAccessToken extends AccessToken {
     public id = 1;
     public createdAt = new Date();
@@ -33,15 +35,13 @@ class DummyUser extends User {
     public updatedAt = new Date();
 
     public remove(): Promise<void> {
-        return new Promise((): void => {});
+        return new Promise((resolve): void => resolve());
     }
 
     public save(): Promise<void> {
-        return new Promise((): void => {});
+        return new Promise((resolve): void => resolve());
     }
 }
-
-afterEach((): void => sinon.restore());
 
 describe('AccessToken class', (): void => {
     it('should exist', (): void => {
@@ -137,8 +137,8 @@ describe('AccessToken class', (): void => {
             .to.be.calledOnce;
     });
 
-    it('should implement an "issue" method that generates token' +
-        ' passwords', async (): Promise<void> => {
+    it('should implement an "issue" static method that generates token' +
+        ' for a user', async (): Promise<void> => {
         const username = 'username';
         const password = 'password';
         const user = new DummyUser({username, password});
@@ -146,10 +146,14 @@ describe('AccessToken class', (): void => {
         expect(AccessToken.issue)
             .to.be.a('function');
 
+        sinon.replace(DummyAccessToken.prototype, 'save', sinon.fake());
+
         const result = await DummyAccessToken.issue(user);
 
         expect(result)
             .to.be.an.instanceOf(AccessToken);
+        expect(result.save)
+            .to.be.calledOnce;
     });
 
     each([
@@ -195,5 +199,64 @@ describe('AccessToken class', (): void => {
 
         expect(result)
             .to.be.equal(expected === 'the user' ? user : null);
+    });
+
+    describe('"refreshToken" static method', (): void => {
+        it('should generate new token for a user when provided an active' +
+            ' token of that user, it should consume the old token too' +
+            '', async (): Promise<void> => {
+            const username = 'username';
+            const password = 'password';
+            const user = new DummyUser({username, password});
+            const accessToken = new DummyAccessToken({
+                user,
+                expires: new Date(
+                    new Date().getTime() + 10 * 60 * 1000,
+                ),
+            });
+
+            expect(AccessToken.refreshToken)
+                .to.be.a('function');
+
+            sinon.replace(
+                DummyAccessToken,
+                'first',
+                sinon.fake.returns(accessToken),
+            );
+            sinon.replace(DummyAccessToken.prototype, 'save', sinon.fake());
+
+            const result = await DummyAccessToken.refreshToken(
+                accessToken.refreshToken,
+            );
+
+            expect(result)
+                .to.be.an.instanceOf(AccessToken);
+            expect(DummyAccessToken.prototype.save)
+                .to.be.calledTwice;
+        });
+
+        it('should do nothing and return null when provided an invalid token' +
+            '', async (): Promise<void> => {
+            const username = 'username';
+            const password = 'password';
+            const user = new DummyUser({username, password});
+
+            expect(AccessToken.refreshToken)
+                .to.be.a('function');
+
+            sinon.replace(
+                DummyAccessToken,
+                'first',
+                sinon.fake.returns(null),
+            );
+            sinon.replace(DummyAccessToken.prototype, 'save', sinon.fake());
+
+            const result = await DummyAccessToken.refreshToken('invalid-token');
+
+            expect(result)
+                .to.be.null;
+            expect(DummyAccessToken.prototype.save)
+                .to.not.be.called;
+        });
     });
 });
