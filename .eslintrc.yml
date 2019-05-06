@@ -21,7 +21,6 @@ rules:
   no-console: 'error'
   comma-dangle: ['error', 'always-multiline']
   indent: ['error', 4]
-  no-unused-vars: ['error', {'args': 'none'}]
   semi: ['error', 'always']
   quotes: ['error', 'single']
   key-spacing: ['error', {'beforeColon': false, 'afterColon': true}]

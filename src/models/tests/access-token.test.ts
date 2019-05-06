@@ -237,10 +237,6 @@ describe('AccessToken class', (): void => {
 
         it('should do nothing and return null when provided an invalid token' +
             '', async (): Promise<void> => {
-            const username = 'username';
-            const password = 'password';
-            const user = new DummyUser({username, password});
-
             expect(AccessToken.refreshToken)
                 .to.be.a('function');
 
