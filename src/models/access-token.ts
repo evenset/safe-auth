@@ -73,14 +73,6 @@ export default abstract class AccessToken {
     /**
      * Looks an AccessToken up in database based on its token, refreshToken,
      * userId, its expired status, its consumed status or its active status
-     *
-     * @param {Object} filters Filters object
-     * @param {string} filters.token Token
-     * @param {string} filters.refreshToken Refresh token
-     * @param {number} filters.userId User
-     * @param {boolean} filters.expired Expired
-     * @param {boolean} filters.consumed Consumed
-     * @param {boolean} filters.active Active
      */
     public static async first(filters: {
         /** Token */
