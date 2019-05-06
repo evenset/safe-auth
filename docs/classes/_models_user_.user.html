@@ -40,8 +40,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -69,16 +67,19 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>User abstract class to be subclassed by a class that implements storage
+						methods (save, get and remove)</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
 						<span class="target">User</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<a href="_models_tests_user_test_.dummyuser.html" class="tsd-signature-type">DummyUser</a>
-							</li>
-						</ul>
 					</li>
 				</ul>
 			</section>
@@ -87,6 +88,12 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_models_user_.user.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_models_user_.user.html#createdat" class="tsd-kind-icon">created<wbr>At</a></li>
@@ -94,6 +101,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_models_user_.user.html#password" class="tsd-kind-icon">password</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_models_user_.user.html#updatedat" class="tsd-kind-icon">updated<wbr>At</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_models_user_.user.html#username" class="tsd-kind-icon">username</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-static"><a href="_models_user_.user.html#accesstokenclass" class="tsd-kind-icon">Access<wbr>Token<wbr>Class</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -103,20 +111,50 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#getaccesstoken" class="tsd-kind-icon">get<wbr>Access<wbr>Token</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#getaccesstokens" class="tsd-kind-icon">get<wbr>Access<wbr>Tokens</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#getactiveaccesstokens" class="tsd-kind-icon">get<wbr>Active<wbr>Access<wbr>Tokens</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#getactiverefreshtokens" class="tsd-kind-icon">get<wbr>Active<wbr>Refresh<wbr>Tokens</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#getrefreshtoken" class="tsd-kind-icon">get<wbr>Refresh<wbr>Token</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#globallogout" class="tsd-kind-icon">global<wbr>Logout</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#logout" class="tsd-kind-icon">logout</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#remove" class="tsd-kind-icon">remove</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#save" class="tsd-kind-icon">save</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_user_.user.html#setpassword" class="tsd-kind-icon">set<wbr>Password</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_models_user_.user.html#authenticate" class="tsd-kind-icon">authenticate</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_models_user_.user.html#create" class="tsd-kind-icon">create</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_models_user_.user.html#get" class="tsd-kind-icon">get</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_models_user_.user.html#first" class="tsd-kind-icon">first</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_models_user_.user.html#hashpassword" class="tsd-kind-icon">hash<wbr>Password</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>User<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_models_user_.user.html" class="tsd-signature-type">User</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L38">models/user.ts:38</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a User by its username and password</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>__namedParameters: <span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_models_user_.user.html" class="tsd-signature-type">User</a></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -127,9 +165,14 @@
 					<div class="tsd-signature tsd-kind-icon">created<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L8">models/user.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L33">models/user.ts:33</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Timestamp of the creation of the instance</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="id" class="tsd-anchor"></a>
@@ -137,19 +180,29 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L5">models/user.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L21">models/user.ts:21</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Primary key</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="password" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> password</h3>
+					<h3>password</h3>
 					<div class="tsd-signature tsd-kind-icon">password<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L7">models/user.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L29">models/user.ts:29</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>User&#39;s password stored as a hash</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="updatedat" class="tsd-anchor"></a>
@@ -157,19 +210,46 @@
 					<div class="tsd-signature tsd-kind-icon">updated<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L9">models/user.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L38">models/user.ts:38</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Timestamp of the last update on the instance (last time save method has
+							been called)</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="username" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> username</h3>
+					<h3>username</h3>
 					<div class="tsd-signature tsd-kind-icon">username<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L6">models/user.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L25">models/user.ts:25</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>User&#39;s username (unique)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-static">
+					<a name="accesstokenclass" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagProtected">Protected</span> Access<wbr>Token<wbr>Class</h3>
+					<div class="tsd-signature tsd-kind-icon">Access<wbr>Token<wbr>Class<span class="tsd-signature-symbol">:</span> <a href="_models_access_token_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">Constructor</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L17">models/user.ts:17</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A reference to the AccessToken class that&#39;s going to be used in
+							internal methods of User class</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -184,16 +264,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L139">models/user.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L146">models/user.ts:146</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>checkPassword</p>
+									<p>As raw passwords are not saved, this method is useful to check a raw
+										password against the hashed password of the User stored in database.
+									If passwords match it reutns true, otherwise it returns false.</p>
 								</div>
-								<p>As raw passwords are not saved, this method is useful to check a raw
-									password against the hashed password of the user stored in database.
-								If passwords match it reutns true, otherwise it returns false.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -209,22 +288,21 @@
 					<a name="getaccesstoken" class="tsd-anchor"></a>
 					<h3>get<wbr>Access<wbr>Token</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Access<wbr>Token<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Access<wbr>Token<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_access_token_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L53">models/user.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L80">models/user.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>getAccessToken</p>
+									<p>Takes a string token and returns the AccessToken instance with that
+										token that belongs to the User instance (has its user foreign key set to
+									the User instance).</p>
 								</div>
-								<p>Takes a string token and returns the AccessToken instance with that
-									token that belongs to the user instance (has its user foreign key set to
-								the user instance).</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -232,7 +310,7 @@
 									<h5>token: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_access_token_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -240,23 +318,22 @@
 					<a name="getaccesstokens" class="tsd-anchor"></a>
 					<h3>get<wbr>Access<wbr>Tokens</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Access<wbr>Tokens<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Access<wbr>Tokens<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_access_token_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L63">models/user.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L91">models/user.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>getAccessTokens</p>
+									<p>Returns all AccessToken instances that belong to this User (have their
+									user foreign key set to the User instance).</p>
 								</div>
-								<p>Returns all AccessToken instances that belong to this user (have their
-								user foreign key set to the user instance).</p>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_access_token_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -264,78 +341,22 @@
 					<a name="getactiveaccesstokens" class="tsd-anchor"></a>
 					<h3>get<wbr>Active<wbr>Access<wbr>Tokens</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Active<wbr>Access<wbr>Tokens<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Active<wbr>Access<wbr>Tokens<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_access_token_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L73">models/user.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L101">models/user.ts:101</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>getActiveAccessTokens</p>
+									<p>Returns all AccessToken instances that belong to this User (have their
+									user foreign key set to the User instance) and are not expired yet.</p>
 								</div>
-								<p>Returns all AccessToken instances that belong to this user (have their
-								user foreign key set to the user instance) and are not expired yet.</p>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getactiverefreshtokens" class="tsd-anchor"></a>
-					<h3>get<wbr>Active<wbr>Refresh<wbr>Tokens</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Active<wbr>Refresh<wbr>Tokens<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.refreshtoken.html" class="tsd-signature-type">RefreshToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L95">models/user.ts:95</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>getActiveRefreshTokens</p>
-								</div>
-								<p>Returns all RefreshToken instances that belong to this user (have their
-								user foreign key set to the user instance) and are not consumed yet.</p>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.refreshtoken.html" class="tsd-signature-type">RefreshToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getrefreshtoken" class="tsd-anchor"></a>
-					<h3>get<wbr>Refresh<wbr>Token</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Refresh<wbr>Token<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.refreshtoken.html" class="tsd-signature-type">RefreshToken</a><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L85">models/user.ts:85</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>getRefreshToken</p>
-								</div>
-								<p>Takes a string token and returns the RefreshToken instance with that
-									token that belongs to the user instance (has its user foreign key set to
-								the user instance).</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>token: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_index_.refreshtoken.html" class="tsd-signature-type">RefreshToken</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_access_token_.accesstoken.html" class="tsd-signature-type">AccessToken</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -349,15 +370,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L186">models/user.ts:186</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L189">models/user.ts:189</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>globalLogout</p>
+									<p>Revokes all active access tokens of the User so that she&#39;s logged out of
+									all devices she&#39;s currently logged in.</p>
 								</div>
-								<p>Revokes all active access tokens of the user so that she&#39;s logged out of
-								all devices she&#39;s currently logged in.</p>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
@@ -373,16 +393,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L175">models/user.ts:175</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L178">models/user.ts:178</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>logout</p>
+									<p>Takes a token string. If there&#39;s an active access token associated with
+										this User with the provided token, it&#39;ll revoke it, otherwise it&#39;ll be a
+									no-op.</p>
 								</div>
-								<p>Takes a token string. If there&#39;s an active access token associated with
-									this user with the provided token, it&#39;ll revoke it, otherwise it&#39;ll be a
-								no-op.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -404,14 +423,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L25">models/user.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L73">models/user.ts:73</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>remove</p>
+									<p>Removes the User instance from database</p>
 								</div>
-								<p>Removes the user instance from database</p>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
@@ -427,14 +445,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L32">models/user.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L54">models/user.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>save</p>
+									<p>Saves the User instance in databse</p>
 								</div>
-								<p>Saves the user instance in databse</p>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
@@ -450,15 +467,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L127">models/user.ts:127</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L136">models/user.ts:136</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>setPassword</p>
+									<p>Set the User&#39;s password and saves the User instance. It stores a salted
+									hashed version of password instead, raw password is never saved.</p>
 								</div>
-								<p>Set the user&#39;s password and saves the user instance. It stores a salted
-								hashed version of password instead, raw password is never saved.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -480,15 +496,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L149">models/user.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L154">models/user.ts:154</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>authenticate</p>
+									<p>Takes a username and password and checks if they match with a User.
+									If it matches it returns the matching User, otherwise it returns null</p>
 								</div>
-								<p>Takes a username and password and checks if they match with a user.
-								If it matches it returns the matching user, otherwise it returns null</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -504,71 +519,35 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="create" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
+					<a name="first" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> first</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>username<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, password<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_user_.user.html" class="tsd-signature-type">User</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">first<span class="tsd-signature-symbol">(</span>filters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_user_.user.html" class="tsd-signature-type">User</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L16">models/user.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L63">models/user.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>create</p>
+									<p>Looks a User up in database based on its id or username</p>
 								</div>
-								<p>Creates a user instance and sets its usrname and password</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>username: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>password: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_user_.user.html" class="tsd-signature-type">User</a><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="get" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> get</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_user_.user.html" class="tsd-signature-type">User</a><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L39">models/user.ts:39</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>get</p>
-								</div>
-								<p>Looks a user up in database based on its id or username</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>__namedParameters: <span class="tsd-signature-type">object</span></h5>
+									<h5>filters: <span class="tsd-signature-type">object</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Filters object</p>
+									</div>
 									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>username<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
-										</li>
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_user_.user.html" class="tsd-signature-type">User</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_user_.user.html" class="tsd-signature-type">User</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -576,25 +555,27 @@
 					<a name="hashpassword" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> hash<wbr>Password</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">hash<wbr>Password<span class="tsd-signature-symbol">(</span>password<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">hash<wbr>Password<span class="tsd-signature-symbol">(</span>password<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, salt<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/a2d4cd1/src/models/user.ts#L104">models/user.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/evenset/safe-auth/blob/ee3e4c7/src/models/user.ts#L111">models/user.ts:111</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>hashPassword</p>
+									<p>Takes a password and returns a salted hash of it</p>
 								</div>
-								<p>Takes a password and returns a salted hash of it</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>password: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> salt: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -613,10 +594,16 @@
 						<a href="../modules/_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_models_index_.html">"models/index"</a>
+						<a href="../modules/_memory_storage_index_.html">"memory-<wbr>storage/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_models_tests_user_test_.html">"models/tests/user.test"</a>
+						<a href="../modules/_memory_storage_storage_.html">"memory-<wbr>storage/storage"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_models_access_token_.html">"models/access-<wbr>token"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_models_index_.html">"models/index"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_models_user_.html">"models/user"</a>
@@ -630,6 +617,9 @@
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
 						<a href="_models_user_.user.html" class="tsd-kind-icon">User</a>
 						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_models_user_.user.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_models_user_.user.html#createdat" class="tsd-kind-icon">created<wbr>At</a>
 							</li>
@@ -645,6 +635,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_models_user_.user.html#username" class="tsd-kind-icon">username</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-static">
+								<a href="_models_user_.user.html#accesstokenclass" class="tsd-kind-icon">Access<wbr>Token<wbr>Class</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_models_user_.user.html#checkpassword" class="tsd-kind-icon">check<wbr>Password</a>
 							</li>
@@ -656,12 +649,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_models_user_.user.html#getactiveaccesstokens" class="tsd-kind-icon">get<wbr>Active<wbr>Access<wbr>Tokens</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_models_user_.user.html#getactiverefreshtokens" class="tsd-kind-icon">get<wbr>Active<wbr>Refresh<wbr>Tokens</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_models_user_.user.html#getrefreshtoken" class="tsd-kind-icon">get<wbr>Refresh<wbr>Token</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_models_user_.user.html#globallogout" class="tsd-kind-icon">global<wbr>Logout</a>
@@ -682,10 +669,7 @@
 								<a href="_models_user_.user.html#authenticate" class="tsd-kind-icon">authenticate</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="_models_user_.user.html#create" class="tsd-kind-icon">create</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="_models_user_.user.html#get" class="tsd-kind-icon">get</a>
+								<a href="_models_user_.user.html#first" class="tsd-kind-icon">first</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="_models_user_.user.html#hashpassword" class="tsd-kind-icon">hash<wbr>Password</a>

@@ -40,8 +40,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -64,8 +62,50 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="safe-auth">safe-auth</h1>
-				<p>Versatile authentication system for Node</p>
+				<p><a href="https://travis-ci.org/evenset/safe-auth"><img src="https://travis-ci.org/evenset/safe-auth.svg?branch=development" alt="Build Status"></a>
+				<a href="https://codecov.io/gh/evenset/safe-auth"><img src="https://codecov.io/gh/evenset/safe-auth/branch/development/graph/badge.svg" alt="codecov"></a></p>
+				<h1 id="what-s-safe-auth">What&#39;s safe-auth</h1>
+				<p>safe-auth is a general purpose authentication solution for Node.js.</p>
+				<h1 id="features">Features</h1>
+				<p>At its core it provides these features:</p>
+				<ol>
+					<li>Create users</li>
+					<li>Activate/Deactivate users</li>
+					<li>Signing in: Issuing an access token and optionally a refresh token for
+					active users when they provide correct username and password</li>
+					<li>Authenticating users based on the token their provide</li>
+					<li>Issuing new tokens when users provide a refresh token</li>
+					<li>Utilities to help users reset their password when they forget it</li>
+					<li>Signing out: Revoking tokens</li>
+					<li>Signing out of all devices: Revoking all active tokens of a user</li>
+					<li>Optionally block a user when he have several failed attempts</li>
+					<li>Logging all requests, responses and events</li>
+					<li>Configuring paramters and enabaling/disabling optional features in a
+					centralized config system</li>
+				</ol>
+				<h1 id="storage-engines">Storage engines</h1>
+				<p>By default safe-auth provides an in memory storage engine (not to be used in
+					production) and it&#39;s able to use different storage engines via third party
+				packages.</p>
+				<p>Currently there is a third party package that uses Sequelize as the storage
+					backend which makes Postgres, MySQL, MariaDB, SQLite and Microsoft SQL
+				available.</p>
+				<p>TypeORM and Mongoose will be supported by other third party packages soon. So
+				the goal is to have at least these storage backends for safe-auth:</p>
+				<ol>
+					<li>Sequelize</li>
+					<li>TypeORM</li>
+					<li>Mongoose</li>
+				</ol>
+				<h1 id="serving-options">Serving options</h1>
+				<p>The core has its API with the JS classes it exposes. One can simply use these
+					classes in her project. But there are third party packages that provide
+				different serving options ready out of the box:</p>
+				<ol>
+					<li>HTTP POST/GET requests</li>
+					<li>GraphQL</li>
+					<li>Rest</li>
+				</ol>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -78,10 +118,16 @@
 						<a href="modules/_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_models_index_.html">"models/index"</a>
+						<a href="modules/_memory_storage_index_.html">"memory-<wbr>storage/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_models_tests_user_test_.html">"models/tests/user.test"</a>
+						<a href="modules/_memory_storage_storage_.html">"memory-<wbr>storage/storage"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_models_access_token_.html">"models/access-<wbr>token"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_models_index_.html">"models/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_models_user_.html">"models/user"</a>

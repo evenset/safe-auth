@@ -8,6 +8,8 @@
     },
     "devDependencies": {
         "@types/chai": "^4.1.7",
+        "@types/chai-as-promised": "^7.1.0",
+        "@types/faker": "^4.1.5",
         "@types/jest": "^24.0.12",
         "@types/node": "^11.13.8",
         "@types/sinon": "^7.0.11",
@@ -15,9 +17,11 @@
         "@typescript-eslint/eslint-plugin": "^1.7.0",
         "@typescript-eslint/parser": "^1.7.0",
         "chai": "^4.2.0",
+        "chai-as-promised": "^7.1.1",
         "eslint": "^5.16.0",
         "faker": "^4.1.0",
         "jest": "^24.7.1",
+        "jest-each": "^24.8.0",
         "sinon": "^7.3.2",
         "sinon-chai": "^3.3.0",
         "ts-jest": "^24.0.2",
@@ -29,13 +33,11 @@
         "tsc": "tsc",
         "tsc:watch": "tsc --watch",
         "test:runner": "export NODE_ENV=test; ",
-        "test": "npm run test:unit && npm run test:integration",
-        "test:unit": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$",
-        "test:unit:watch": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --watch",
-        "test:integration": "exit 0",
+        "test": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --coverage",
+        "test:watch": "npm run test:runner -- jest --verbose --testRegex .*\\.test\\.ts$ --coverage --watch",
         "lint": "eslint --ext ts ./src",
         "audit-ci": "audit-ci",
-        "tsdoc": "tsdoc"
+        "typedoc": "typedoc"
     },
     "repository": {
         "type": "git",
