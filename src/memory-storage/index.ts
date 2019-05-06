@@ -30,7 +30,7 @@ export class AccessToken extends
         active,
     }: {
         /** Token */
-        token: string;
+        token?: string;
         /** Refresh token */
         refreshToken?: string;
         /** User */
