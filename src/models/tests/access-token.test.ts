@@ -15,8 +15,19 @@ afterEach((): void => sinon.restore());
 
 class DummyAccessToken extends AccessToken {
     public id = 1;
+    public token = '';
+    public refreshToken = '';
+    public expires: Date|null;
+    public user: User;
+    protected consumed = false;
     public createdAt = new Date();
     public updatedAt = new Date();
+
+    public constructor({user, expires}: {user: User; expires: Date|null}) {
+        super();
+        this.user = user;
+        this.expires = expires;
+    }
 
     public remove(): Promise<void> {
         return new Promise((): void => {});
@@ -31,8 +42,21 @@ class DummyUser extends User {
     public static AccessTokenClass = DummyAccessToken;
 
     public id = 1;
+    public username: string;
+    public password: string;
+    public isActive: boolean;
     public createdAt = new Date();
     public updatedAt = new Date();
+
+    public constructor({username, password}: {
+        username: string;
+        password: string;
+    }) {
+        super();
+        this.username = username;
+        this.password = User.hashPassword(password);
+        this.isActive = false; // TODO: Configuration
+    }
 
     public remove(): Promise<void> {
         return new Promise((resolve): void => resolve());
