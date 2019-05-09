@@ -5,28 +5,28 @@ import sinonChai from 'sinon-chai';
 import faker from 'faker';
 import each from 'jest-each';
 
-import {User} from '..';
+import {MemoryUser} from '..';
 
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
 const expect = chai.expect;
 
 afterEach((): void => {
-    User.items = {};
+    MemoryUser.items = {};
     sinon.restore();
 });
 
 describe('StoredUser class', (): void => {
     it('should exist', (): void => {
-        expect(User)
+        expect(MemoryUser)
             .to.exist;
     });
 
     it('should be constructable', (): void => {
-        sinon.replace(User, 'hashPassword', <T>(a: T): T => a);
+        sinon.replace(MemoryUser, 'hashPassword', <T>(a: T): T => a);
         const username = faker.internet.userName();
         const password = faker.internet.password();
-        const user = new User({username, password});
+        const user = new MemoryUser({username, password});
 
         expect(user)
             .to.have.property('username')
@@ -43,7 +43,7 @@ describe('StoredUser class', (): void => {
         + ' them', (): void => {
         const username = faker.internet.userName();
         const password = faker.internet.password();
-        const user = new User({username, password});
+        const user = new MemoryUser({username, password});
         user.save();
 
         expect(user)
@@ -55,7 +55,7 @@ describe('StoredUser class', (): void => {
         + ' attribute', (): void => {
         const username = faker.internet.userName();
         const password = faker.internet.password();
-        const user = new User({username, password});
+        const user = new MemoryUser({username, password});
         user.save();
 
         expect(user)
@@ -73,9 +73,9 @@ describe('StoredUser class', (): void => {
         ' in database based on its token and optionally user id or expiration' +
         ' status.', (): void => {
         const users = [
-            new User({username: 'user1', password: 'password'}),
-            new User({username: 'user2', password: 'password'}),
-            new User({username: 'user3', password: 'password'}),
+            new MemoryUser({username: 'user1', password: 'password'}),
+            new MemoryUser({username: 'user2', password: 'password'}),
+            new MemoryUser({username: 'user3', password: 'password'}),
         ];
         each([
             [users[0], {username: users[0].username}, users],
@@ -101,9 +101,9 @@ describe('StoredUser class', (): void => {
             if (query.id instanceof Function)
                 query.id = query.id();
             await Promise.all(users.map(
-                async (user: User): Promise<void> => await user.save(),
+                async (user: MemoryUser): Promise<void> => await user.save(),
             ));
-            const result = await User.first(query);
+            const result = await MemoryUser.first(query);
 
             expect(result)
                 .to.be.equal(expected);

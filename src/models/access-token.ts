@@ -88,7 +88,7 @@ export default abstract class AccessToken {
         /** Active */
         active?: boolean;
     }): Promise<AccessToken|null> {
-        throw new Error('Not implemented');
+        throw new Error(`"first" method is not implemented for "${this.name}"`);
     }
 
     /**
@@ -111,7 +111,7 @@ export default abstract class AccessToken {
         /** Active */
         active?: boolean;
     }): Promise<AccessToken[]> {
-        throw new Error('Not implemented');
+        throw new Error(`"filter" method is not implemented for "${this.name}"`);
     }
 
     /**

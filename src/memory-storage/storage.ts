@@ -5,7 +5,7 @@ interface Constructor<T = {}> {
     prototype: T;
 }
 
-interface StoredModelConstructor<T = {
+export interface StoredModelConstructor<T = {
     remove(): Promise<void>;
     save(): Promise<void>;
     id: number|undefined;

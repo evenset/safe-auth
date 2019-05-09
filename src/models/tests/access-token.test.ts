@@ -54,7 +54,9 @@ describe('AccessToken class', (): void => {
         expect(AccessToken.first)
             .to.be.a('function');
         await expect(AccessToken.first({token: 'token'}))
-            .to.be.rejectedWith('Not implemented');
+            .to.be.rejectedWith(
+                '"first" method is not implemented for "AccessToken"',
+            );
     });
 
     it('should define but not implement "filter" static method' +
@@ -62,7 +64,9 @@ describe('AccessToken class', (): void => {
         expect(AccessToken.filter)
             .to.be.a('function');
         await expect(AccessToken.filter({}))
-            .to.be.rejectedWith('Not implemented');
+            .to.be.rejectedWith(
+                '"filter" method is not implemented for "AccessToken"',
+            );
     });
 
     each([

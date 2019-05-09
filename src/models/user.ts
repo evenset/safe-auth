@@ -71,7 +71,7 @@ export default abstract class User {
         username?: string;
         isActive?: boolean;
     }): Promise<User|null> {
-        throw new Error('Not implemented');
+        throw new Error(`"first" method is not implemented for "${this.name}"`);
     }
 
     /**
