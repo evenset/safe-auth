@@ -16,7 +16,7 @@ afterEach((): void => {
 });
 
 describe('Normal flow', (): void => {
-    it('Should be able to create a user, authenticate her, issue an access' +
+    it('should be able to create a user, authenticate her, issue an access' +
         ' token for her and authenticate the access token, each of these' +
         ' steps should return null when the previous steps aren\'t done yet' +
         ' or when called with invalid arguments', async (): Promise<void> => {
@@ -59,7 +59,7 @@ describe('Normal flow', (): void => {
 });
 
 describe('Refreshing token', (): void => {
-    it('Should be able to create a user, issue an access token for her and' +
+    it('should be able to create a user, issue an access token for her and' +
         ' refresh that token (consuming old one). Refreshing token should' +
         ' return null called with invalid token', async (): Promise<void> => {
         const user = new MemoryUser({username: 'u', password: 'p'});
