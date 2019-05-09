@@ -87,7 +87,13 @@ describe('StoredUser class', (): void => {
                 users,
             ],
             [null, {username: 'invalid-username'}, users],
-        ]).it('Should return %s for query %s', async (
+            [users[0], {}, users],
+            [
+                null,
+                {username: users[0].username, id: (): number => users[1].id},
+                users,
+            ],
+        ]).it('should return %s for query %s', async (
             expected,
             query,
             users,
@@ -101,23 +107,6 @@ describe('StoredUser class', (): void => {
 
             expect(result)
                 .to.be.equal(expected);
-        });
-
-        each([
-            [{username: users[0].username, id: 1}],
-            [{username: users[0].username, id: (): number => users[1].id}],
-        ]).it('Should throw when both username and id parameters are set: %s' +
-            '', async (query): Promise<void> => {
-            if (query.id instanceof Function)
-                query.id = query.id();
-            await Promise.all(users.map(
-                async (user: User): Promise<void> => await user.save(),
-            ));
-
-            expect(User.first(query))
-                .to.be.rejectedWith(
-                    'Either "id" or "username" should be provided.',
-                );
         });
     });
 });

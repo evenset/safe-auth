@@ -27,6 +27,12 @@ describe('Normal flow', (): void => {
             .to.be.null;
         await user.save();
         expect(await User.authenticate('u', 'p'))
+            .to.be.equal(null);
+        user.isActive = true;
+        // Event though saving is not required in memory storage backend it's
+        // here to keep the code snippet a valid sample for all storage backends
+        await user.save();
+        expect(await User.authenticate('u', 'p'))
             .to.be.equal(user);
 
         expect(await AccessToken.authenticate('some-token'))
@@ -36,6 +42,17 @@ describe('Normal flow', (): void => {
             .to.be.null;
         expect(await AccessToken.authenticate(accessToken.refreshToken))
             .to.be.null;
+
+        user.isActive = false;
+        // Event though saving is not required in memory storage backend it's
+        // here to keep the code snippet a valid sample for all storage backends
+        user.save();
+        expect(await AccessToken.authenticate(accessToken.token))
+            .to.be.null;
+        user.isActive = true;
+        // Event though saving is not required in memory storage backend it's
+        // here to keep the code snippet a valid sample for all storage backends
+        user.save();
         expect(await AccessToken.authenticate(accessToken.token))
             .to.be.equal(user);
     });
@@ -54,9 +71,16 @@ describe('Refreshing token', (): void => {
         expect(await AccessToken.refreshToken(accessToken.token))
             .to.be.null;
 
+        expect(await AccessToken.refreshToken(accessToken.refreshToken))
+            .to.be.null;
+        user.isActive = true;
+        // Event though saving is not required in memory storage backend it's
+        // here to keep the code snippet a valid sample for all storage backends
+        user.save();
         const result = await AccessToken.refreshToken(accessToken.refreshToken);
         expect(result)
             .to.be.an.instanceOf(AccessToken);
-        expect(accessToken.isConsumed()).to.be.true;
+        expect(accessToken.isConsumed())
+            .to.be.true;
     });
 });

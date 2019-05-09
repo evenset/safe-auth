@@ -77,6 +77,7 @@ describe('StoredAccessToken class', (): void => {
             new AccessToken({user: secondUser, expires: past}),
             new AccessToken({user: secondUser, expires: future}),
         ];
+        (accessTokens[2] as any).consumed = true;
         each([
             [accessTokens[0], {token: accessTokens[0].token}, accessTokens],
             [accessTokens[1], {token: accessTokens[1].token}, accessTokens],
@@ -92,28 +93,28 @@ describe('StoredAccessToken class', (): void => {
             ],
             [
                 accessTokens[0],
-                {token: accessTokens[0].token, expired: true},
+                {token: accessTokens[0].token, isExpired: true},
                 accessTokens,
             ],
             [
                 null,
-                {token: accessTokens[0].token, expired: false},
+                {token: accessTokens[0].token, isExpired: false},
                 accessTokens,
             ],
             [
                 accessTokens[0],
                 {
                     token: accessTokens[0].token,
-                    expired: true,
+                    isExpired: true,
                     userId: firstUser.id,
                 },
                 accessTokens,
             ],
             [
-                null,
+                accessTokens[2],
                 {
-                    token: accessTokens[0].token,
-                    expired: false,
+                    token: accessTokens[2].token,
+                    isConsumed: true,
                     userId: secondUser.id,
                 },
                 accessTokens,
@@ -122,7 +123,7 @@ describe('StoredAccessToken class', (): void => {
                 accessTokens[1],
                 {
                     token: accessTokens[1].token,
-                    expired: false,
+                    isActive: true,
                     userId: firstUser.id,
                 },
                 accessTokens,
@@ -156,6 +157,7 @@ describe('StoredAccessToken class', (): void => {
             new AccessToken({user: secondUser, expires: past}),
             new AccessToken({user: secondUser, expires: future}),
         ];
+        (accessTokens[2] as any).consumed = true;
         each([
             [accessTokens, {}, accessTokens],
             [
@@ -166,27 +168,27 @@ describe('StoredAccessToken class', (): void => {
             [[], {userId: thirdUser.id}, accessTokens],
             [
                 [accessTokens[0], accessTokens[2]],
-                {expired: true},
+                {isExpired: true},
                 accessTokens,
             ],
             [
                 [accessTokens[1], accessTokens[3]],
-                {expired: false},
+                {isExpired: false},
                 accessTokens,
             ],
             [
                 [accessTokens[0]],
-                {expired: true, userId: firstUser.id},
+                {isExpired: true, userId: firstUser.id},
                 accessTokens,
             ],
             [
                 [accessTokens[3]],
-                {expired: false, userId: secondUser.id},
+                {isConsumed: false, userId: secondUser.id},
                 accessTokens,
             ],
             [
                 [accessTokens[1]],
-                {expired: false, userId: firstUser.id},
+                {isActive: true, userId: firstUser.id},
                 accessTokens,
             ],
         ]).it('Should return %s for query %s', async (

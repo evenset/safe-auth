@@ -17,17 +17,17 @@ export class AccessToken extends
      * @param {string} filters.token Token
      * @param {string} filters.refreshToken Refresh token
      * @param {number} filters.userId User
-     * @param {boolean} filters.expired Expired
-     * @param {boolean} filters.consumed Consumed
-     * @param {boolean} filters.active Active
+     * @param {boolean} filters.isExpired Expired status
+     * @param {boolean} filters.isConsumed Consumed status
+     * @param {boolean} filters.isActive Activation status
      */
     public static async first({
         token,
         refreshToken,
         userId,
-        expired,
-        consumed,
-        active,
+        isExpired,
+        isConsumed,
+        isActive,
     }: {
         /** Token */
         token?: string;
@@ -36,11 +36,11 @@ export class AccessToken extends
         /** User */
         userId?: number;
         /** Expired */
-        expired?: boolean;
+        isExpired?: boolean;
         /** Consumed */
-        consumed?: boolean;
+        isConsumed?: boolean;
         /** Active */
-        active?: boolean;
+        isActive?: boolean;
     }): Promise<AccessToken|null> {
         const items = Object.values(this.items)
             .filter((item): boolean => (
@@ -50,9 +50,12 @@ export class AccessToken extends
                     item.refreshToken === refreshToken
                 ) &&
                 (userId === undefined || item.user.id === userId) &&
-                (expired === undefined || item.isExpired() === expired) &&
-                (consumed === undefined || item.isConsumed() === consumed) &&
-                (active === undefined || item.isActive() === active)
+                (isExpired === undefined || item.isExpired() === isExpired) &&
+                (
+                    isConsumed === undefined ||
+                    item.isConsumed() === isConsumed
+                ) &&
+                (isActive === undefined || item.isActive() === isActive)
             ));
         return items[0] || null;
     }
@@ -63,26 +66,29 @@ export class AccessToken extends
      *
      * @param {Object} filters Filters object
      * @param {number} filters.userId User
-     * @param {boolean} filters.expired Expired
-     * @param {boolean} filters.consumed Consumed
-     * @param {boolean} filters.active Active
+     * @param {boolean} filters.isExpired Expired status
+     * @param {boolean} filters.isConsumed Consumed status
+     * @param {boolean} filters.isActive Activation status
      */
-    public static async filter({userId, expired, consumed, active}: {
+    public static async filter({userId, isExpired, isConsumed, isActive}: {
         /** User */
         userId?: number;
         /** Expired */
-        expired?: boolean;
+        isExpired?: boolean;
         /** Consumed */
-        consumed?: boolean;
+        isConsumed?: boolean;
         /** Active */
-        active?: boolean;
-    }={}): Promise<AccessToken[]> {
+        isActive?: boolean;
+    }): Promise<AccessToken[]> {
         return Object.values(this.items)
             .filter((item): boolean => (
                 (userId === undefined || item.user.id === userId) &&
-                (expired === undefined || item.isExpired() === expired) &&
-                (consumed === undefined || item.isConsumed() === consumed) &&
-                (active === undefined || item.isActive() === active)
+                (isExpired === undefined || item.isExpired() === isExpired) &&
+                (
+                    isConsumed === undefined ||
+                    item.isConsumed() === isConsumed
+                ) &&
+                (isActive === undefined || item.isActive() === isActive)
             ));
     }
 }
@@ -103,20 +109,23 @@ export class User extends Stored<CoreUser, typeof CoreUser>(CoreUser) {
      * @param {Object} filters Filters object
      * @param {number} filters.id Id
      * @param {strign} filters.username Username
+     * @param {boolean} filters.isActive Activation status
      */
-    public static async first({id, username}: {
+    public static async first({id, username, isActive}: {
+        /** Id */
         id?: number;
+        /** Username*/
         username?: string;
+        /** Active */
+        isActive?: boolean;
     }): Promise<User|null> {
-        if (id && username || !id && !username)
-            throw new Error('Either "id" or "username" should be provided.');
-        if (id)
-            return this.items[id] || null;
-        else {
-            for (const id in this.items)
-                if (this.items[id].username === username)
-                    return this.items[id];
-            return null;
-        }
+        const items = Object.values(id !== undefined
+            ? [this.items[id]]
+            : this.items)
+            .filter((item): boolean => (
+                (username === undefined || item.username === username) &&
+                (isActive === undefined || item.isActive === isActive)
+            ));
+        return items[0] || null;
     }
 }
