@@ -1,14 +1,11 @@
-import {
-    AccessToken as CoreAccessToken,
-    User as CoreUser,
-} from '../models';
+import {AccessToken as AccessToken, User as User} from '../models';
 import Stored from './storage';
 
 /*
  * AccessToken class implemented to use dummy in memory database
  */
-export class AccessToken extends
-    Stored<CoreAccessToken, typeof CoreAccessToken>(CoreAccessToken) {
+export class MemoryAccessToken extends
+    Stored<AccessToken, typeof AccessToken>(AccessToken) {
     /**
      * Looks an AccessToken up in memory based on its token, refreshToken,
      * userId, its expired status, its consumed status or its active status
@@ -41,7 +38,7 @@ export class AccessToken extends
         isConsumed?: boolean;
         /** Active */
         isActive?: boolean;
-    }): Promise<AccessToken|null> {
+    }): Promise<MemoryAccessToken|null> {
         const items = Object.values(this.items)
             .filter((item): boolean => (
                 (token === undefined || item.token === token) &&
@@ -79,7 +76,7 @@ export class AccessToken extends
         isConsumed?: boolean;
         /** Active */
         isActive?: boolean;
-    }): Promise<AccessToken[]> {
+    }): Promise<MemoryAccessToken[]> {
         return Object.values(this.items)
             .filter((item): boolean => (
                 (userId === undefined || item.user.id === userId) &&
@@ -96,12 +93,12 @@ export class AccessToken extends
 /*
  * User class implemented to use in memory dummy database
  */
-export class User extends Stored<CoreUser, typeof CoreUser>(CoreUser) {
+export class MemoryUser extends Stored<User, typeof User>(User) {
     /**
      * A reference to the AccessToken class that's going to be used in
      * internal methods of User class
      */
-    protected static AccessTokenClass = AccessToken;
+    protected static AccessTokenClass = MemoryAccessToken;
 
     /**
      * Looks a User up in memory based on its id or username
@@ -118,7 +115,7 @@ export class User extends Stored<CoreUser, typeof CoreUser>(CoreUser) {
         username?: string;
         /** Active */
         isActive?: boolean;
-    }): Promise<User|null> {
+    }): Promise<MemoryUser|null> {
         const items = Object.values(id !== undefined
             ? [this.items[id]]
             : this.items)

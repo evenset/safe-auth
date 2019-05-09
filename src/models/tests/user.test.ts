@@ -54,7 +54,7 @@ describe('User class', (): void => {
         expect(User.first)
             .to.be.a('function');
         await expect(User.first({id: 1}))
-            .to.be.rejectedWith('Not implemented');
+            .to.be.rejectedWith('"first" method is not implemented for "User"');
     });
 
     it('should implement "getAccessToken" method', (): void => {
