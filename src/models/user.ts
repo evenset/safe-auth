@@ -1,10 +1,6 @@
 import crypto from 'crypto';
 import {AccessToken} from './index';
 
-interface Constructor<T = {}> {
-    new(...args: any[]): T;
-}
-
 /**
  * User abstract class to be subclassed by a class that implements storage
  * methods (save, get and remove)
@@ -14,7 +10,7 @@ export default abstract class User {
      * A reference to the AccessToken class that's going to be used in
      * internal methods of User class
      */
-    protected static AccessTokenClass: typeof AccessToken & Constructor;
+    protected static AccessTokenClass: typeof AccessToken;
     /**
      * Primary key
      */
@@ -22,15 +18,15 @@ export default abstract class User {
     /**
      * User's username (unique)
      */
-    public username: string;
+    public abstract username: string;
     /**
      * User's password stored as a hash
      */
-    public password: string;
+    public abstract password: string;
     /**
      * Stores whether the user is active or not in a boolean
      */
-    public isActive: boolean;
+    public abstract isActive: boolean;
     /**
      * Timestamp of the creation of the instance
      */
@@ -44,13 +40,7 @@ export default abstract class User {
     /**
      * Creates a User by its username and password
      */
-    public constructor({username, password}: {
-        username: string;
-        password: string;
-    }) {
-        this.username = username;
-        this.password = User.hashPassword(password);
-        this.isActive = false; // TODO: Configuration
+    public constructor(...args: any[]) {
     }
 
     /**
