@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import {AccessToken as AccessToken, User as User} from '../models';
+import {AccessToken, User} from '../models';
 import Stored from './storage';
 
 /*
@@ -192,5 +192,30 @@ export class MemoryUser extends Stored<User, typeof User>(User) {
                 (isActive === undefined || item.isActive === isActive)
             ));
         return items[0] || null;
+    }
+
+    /**
+     * Takes a string token and returns the AccessToken instance with that
+     * token that belongs to the User instance (has its user foreign key set to
+     * the User instance).
+     */
+    public async getAccessToken(token: string): Promise<AccessToken|null> {
+        return await AccessToken.first({token, userId: this.id});
+    }
+
+    /**
+     * Returns all AccessToken instances that belong to this User (have their
+     * user foreign key set to the User instance).
+     */
+    public async getAccessTokens(): Promise<AccessToken[]> {
+        return await AccessToken.filter({userId: this.id});
+    }
+
+    /**
+     * Returns all AccessToken instances that belong to this User (have their
+     * user foreign key set to the User instance) and are not expired yet.
+     */
+    public async getActiveAccessTokens(): Promise<AccessToken[]> {
+        return await AccessToken.filter({userId: this.id, active: true});
     }
 }

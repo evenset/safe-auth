@@ -58,12 +58,24 @@ class DummyUser extends User {
         this.isActive = false; // TODO: Configuration
     }
 
+    public save(): Promise<void> {
+        return new Promise((resolve): void => resolve());
+    }
+
     public remove(): Promise<void> {
         return new Promise((resolve): void => resolve());
     }
 
-    public save(): Promise<void> {
-        return new Promise((resolve): void => resolve());
+    public async getAccessToken(token: string): Promise<AccessToken|null> {
+        return new Promise((): void => {});
+    }
+
+    public async getAccessTokens(): Promise<AccessToken[]> {
+        return new Promise((): void => {});
+    }
+
+    public async getActiveAccessTokens(): Promise<AccessToken[]> {
+        return new Promise((): void => {});
     }
 }
 

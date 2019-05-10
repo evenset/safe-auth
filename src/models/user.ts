@@ -7,11 +7,6 @@ import {AccessToken} from './index';
  */
 export default abstract class User {
     /**
-     * A reference to the AccessToken class that's going to be used in
-     * internal methods of User class
-     */
-    protected static AccessTokenClass: typeof AccessToken;
-    /**
      * Primary key
      */
     public abstract id: number;
@@ -74,33 +69,20 @@ export default abstract class User {
      * token that belongs to the User instance (has its user foreign key set to
      * the User instance).
      */
-    public async getAccessToken(token: string): Promise<AccessToken|null> {
-        return await (this.constructor as typeof User).AccessTokenClass.first({
-            token,
-            userId: this.id,
-        });
-    }
+    public abstract async getAccessToken(token: string):
+    Promise<AccessToken|null>;
 
     /**
      * Returns all AccessToken instances that belong to this User (have their
      * user foreign key set to the User instance).
      */
-    public async getAccessTokens(): Promise<AccessToken[]> {
-        return await (this.constructor as typeof User).AccessTokenClass.filter({
-            userId: this.id,
-        });
-    }
+    public abstract async getAccessTokens(): Promise<AccessToken[]>;
 
     /**
      * Returns all AccessToken instances that belong to this User (have their
      * user foreign key set to the User instance) and are not expired yet.
      */
-    public async getActiveAccessTokens(): Promise<AccessToken[]> {
-        return await (this.constructor as typeof User).AccessTokenClass.filter({
-            userId: this.id,
-            active: true,
-        });
-    }
+    public abstract async getActiveAccessTokens(): Promise<AccessToken[]>;
 
     /**
      * Takes a password and returns a salted hash of it

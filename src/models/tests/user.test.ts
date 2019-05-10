@@ -58,11 +58,23 @@ class DummyUser extends User {
         this.isActive = false; // TODO: Configuration
     }
 
+    public save(): Promise<void> {
+        return new Promise((): void => {});
+    }
+
     public remove(): Promise<void> {
         return new Promise((): void => {});
     }
 
-    public save(): Promise<void> {
+    public async getAccessToken(token: string): Promise<AccessToken|null> {
+        return new Promise((): void => {});
+    }
+
+    public async getAccessTokens(): Promise<AccessToken[]> {
+        return new Promise((): void => {});
+    }
+
+    public async getActiveAccessTokens(): Promise<AccessToken[]> {
         return new Promise((): void => {});
     }
 }
@@ -79,49 +91,6 @@ describe('User class', (): void => {
             .to.be.a('function');
         await expect(User.first({id: 1}))
             .to.be.rejectedWith('"first" method is not implemented for "User"');
-    });
-
-    it('should implement "getAccessToken" method', (): void => {
-        const username = 'username';
-        const password = 'password';
-        const token = 'token';
-        const user = new DummyUser({username, password});
-        expect(user.getAccessToken)
-            .to.be.a('function');
-        sinon.replace(DummyAccessToken, 'first', sinon.fake());
-
-        user.getAccessToken(token);
-
-        expect(DummyAccessToken.first)
-            .to.be.calledOnceWith({token, userId: user.id});
-    });
-
-    it('should implement "getAccessTokens" method', (): void => {
-        const username = 'username';
-        const password = 'password';
-        const user = new DummyUser({username, password});
-        expect(user.getAccessTokens)
-            .to.be.a('function');
-        sinon.replace(DummyAccessToken, 'filter', sinon.fake());
-
-        user.getAccessTokens();
-
-        expect(DummyAccessToken.filter)
-            .to.be.calledOnceWith({userId: user.id});
-    });
-
-    it('should implement "getAccessToken" method', (): void => {
-        const username = 'username';
-        const password = 'password';
-        const user = new DummyUser({username, password});
-        expect(user.getActiveAccessTokens)
-            .to.be.a('function');
-        sinon.replace(DummyAccessToken, 'filter', sinon.fake());
-
-        user.getActiveAccessTokens();
-
-        expect(DummyAccessToken.filter)
-            .to.be.calledOnceWith({active: true, userId: user.id});
     });
 
     describe('hashPassword method', (): void => {

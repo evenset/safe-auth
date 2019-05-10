@@ -6,6 +6,7 @@ import faker from 'faker';
 import each from 'jest-each';
 
 import {MemoryUser} from '..';
+import {AccessToken} from '../..';
 
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
@@ -67,6 +68,49 @@ describe('StoredUser class', (): void => {
         expect(user)
             .to.have.property('id')
             .that.is.undefined;
+    });
+
+    it('should implement "getAccessToken" method', (): void => {
+        const username = 'username';
+        const password = 'password';
+        const token = 'token';
+        const user = new MemoryUser({username, password});
+        expect(user.getAccessToken)
+            .to.be.a('function');
+        sinon.replace(AccessToken, 'first', sinon.fake());
+
+        user.getAccessToken(token);
+
+        expect(AccessToken.first)
+            .to.be.calledOnceWith({token, userId: user.id});
+    });
+
+    it('should implement "getAccessTokens" method', (): void => {
+        const username = 'username';
+        const password = 'password';
+        const user = new MemoryUser({username, password});
+        expect(user.getAccessTokens)
+            .to.be.a('function');
+        sinon.replace(AccessToken, 'filter', sinon.fake());
+
+        user.getAccessTokens();
+
+        expect(AccessToken.filter)
+            .to.be.calledOnceWith({userId: user.id});
+    });
+
+    it('should implement "getAccessToken" method', (): void => {
+        const username = 'username';
+        const password = 'password';
+        const user = new MemoryUser({username, password});
+        expect(user.getActiveAccessTokens)
+            .to.be.a('function');
+        sinon.replace(AccessToken, 'filter', sinon.fake());
+
+        user.getActiveAccessTokens();
+
+        expect(AccessToken.filter)
+            .to.be.calledOnceWith({active: true, userId: user.id});
     });
 
     describe('should implement a "first" method that looks up a "User"' +
