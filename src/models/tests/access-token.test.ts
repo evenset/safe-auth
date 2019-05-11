@@ -39,8 +39,6 @@ class DummyAccessToken extends AccessToken {
 }
 
 class DummyUser extends User {
-    public static AccessTokenClass = DummyAccessToken;
-
     public id = 1;
     public username: string;
     public password: string;

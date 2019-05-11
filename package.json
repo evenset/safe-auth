@@ -1,6 +1,6 @@
 {
     "name": "safe-auth",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "General purpose authentication solution for Node.js",
     "dependencies": {},
     "devDependencies": {
