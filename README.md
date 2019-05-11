@@ -39,9 +39,9 @@ available.
 
 TypeORM and Mongoose will be supported by other third party packages soon. So
 the goal is to have at least these storage backends for safe-auth:
-1. Sequelize
-2. TypeORM
-3. Mongoose
+1. Sequelize by [safe-auth-sequelize](https://github.com/evenset/safe-auth-sequelize)
+2. TypeORM - to be done in future
+3. Mongoose - to be done in future
 
 # Serving options
 
