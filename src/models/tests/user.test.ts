@@ -13,31 +13,6 @@ const expect = chai.expect;
 
 afterEach((): void => sinon.restore());
 
-class DummyAccessToken extends AccessToken {
-    public id = 1;
-    public token = '';
-    public refreshToken = '';
-    public expires: Date|null;
-    public user: User;
-    protected consumed = false;
-    public createdAt = new Date();
-    public updatedAt = new Date();
-
-    public constructor({user, expires}: {user: User; expires: Date|null}) {
-        super();
-        this.user = user;
-        this.expires = expires;
-    }
-
-    public remove(): Promise<void> {
-        return new Promise((): void => {});
-    }
-
-    public save(): Promise<void> {
-        return new Promise((): void => {});
-    }
-}
-
 class DummyUser extends User {
     public id = 1;
     public username: string;
