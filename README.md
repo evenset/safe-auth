@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/evenset/safe-auth.svg?branch=development)](https://travis-ci.org/evenset/safe-auth)
 [![codecov](https://codecov.io/gh/evenset/safe-auth/branch/development/graph/badge.svg)](https://codecov.io/gh/evenset/safe-auth)
+[![npm version](https://badge.fury.io/js/safe-auth.svg)](https://badge.fury.io/js/safe-auth)
 
 # What's safe-auth
 
@@ -38,9 +39,9 @@ available.
 
 TypeORM and Mongoose will be supported by other third party packages soon. So
 the goal is to have at least these storage backends for safe-auth:
-1. Sequelize
-2. TypeORM
-3. Mongoose
+1. Sequelize by [safe-auth-sequelize](https://github.com/evenset/safe-auth-sequelize)
+2. TypeORM - to be done in future
+3. Mongoose - to be done in future
 
 # Serving options
 

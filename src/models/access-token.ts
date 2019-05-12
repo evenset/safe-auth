@@ -56,7 +56,7 @@ export default abstract class AccessToken {
     /**
      * Saves the AccessToken instance in databse
      */
-    public abstract save(): Promise<void>;
+    public abstract async save(): Promise<void>;
 
     /**
      * Looks an AccessToken up in database based on its token, refreshToken,
